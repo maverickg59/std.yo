@@ -19,15 +19,29 @@ const defaultQuizData = [
 ];
 
 export function Quiz() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
+  const [error, setError] = useState<string>();
   const [page, setPage] = useState(1);
   // const { scores } = useQuizStore();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/data/quiz_data/linux_quiz.json"); // Adjust the path if your file is located elsewhere
-      const jsonData = await response.json();
-      setData(jsonData);
+      try {
+        const response = await fetch("/data/quiz_data/linux_quiz.json");
+
+        if (!response.ok) {
+          throw new Error("That file may not exist.");
+        }
+
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message); // Safe to access error.message here
+        } else {
+          setError("An unknown error occurred");
+        }
+      }
     };
 
     fetchData();
@@ -48,6 +62,14 @@ export function Quiz() {
         return "D";
     }
   };
+
+  if (error) {
+    return <div className="error-message">Error: {error}</div>;
+  }
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Stack>
