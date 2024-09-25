@@ -9,7 +9,7 @@ type Scores = {
 
 type QuizState = {
   scores: Scores;
-  // addScore: (subject: string, quizId: string, score: number) => void;
+  addScore: (subject: string, quizId: string, score: number) => void;
   // getScore: (subject: string, quizId: string) => number;
 };
 
@@ -21,17 +21,17 @@ export const useQuizStore = create<QuizState>()(
           1234: 5,
         },
       },
-      // addScore: (subject: string, quizId: string, score: number) => {
-      //   set((state) => ({
-      //     scores: {
-      //       ...state.scores,
-      //       [subject]: {
-      //         ...(state.scores[subject] || {}),
-      //         [quizId]: score,
-      //       },
-      //     },
-      //   }));
-      // },
+      addScore: (subject: string, quizId: string, score: number) => {
+        set((state) => ({
+          scores: {
+            ...state.scores,
+            [subject]: {
+              ...(state.scores[subject] || {}),
+              [quizId]: score,
+            },
+          },
+        }));
+      },
       // getScore: (subject: string, quizId: string) => {
       //   return (state) => state.scores[subject]?.[quizId] || 0;
       // },
