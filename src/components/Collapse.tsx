@@ -1,16 +1,23 @@
 import {
   Box,
   Button,
-  Collapse,
+  Collapse as ChakraCollapse,
   HStack,
   Icon,
   Stack,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FiChevronDown, FiFile } from "react-icons/fi";
+import { IconType } from "react-icons";
+import { FiChevronDown } from "react-icons/fi";
 
-export const DocumentCollapse = () => {
+type Props = {
+  name: string;
+  quizzes: string[];
+  icon: IconType;
+};
+
+export const Collapse = ({ name, quizzes, icon }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
@@ -21,20 +28,20 @@ export const DocumentCollapse = () => {
         width="full"
       >
         <HStack spacing="3">
-          <Icon as={FiFile} />
-          <Text as="span">Documents</Text>
+          <Icon as={icon} />
+          <Text as="span">{name}</Text>
         </HStack>
         <PopoverIcon isOpen={isOpen} />
       </Button>
-      <Collapse in={isOpen} animateOpacity>
+      <ChakraCollapse in={isOpen} animateOpacity>
         <Stack spacing="1" alignItems="stretch" ps="8" py="1">
-          {["Resumes", "Cover Letter", "Personal", "Education"].map((item) => (
+          {quizzes.map((item) => (
             <Button key={item} variant="tertiary" justifyContent="start">
               {item}
             </Button>
           ))}
         </Stack>
-      </Collapse>
+      </ChakraCollapse>
     </Box>
   );
 };

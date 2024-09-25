@@ -4,31 +4,72 @@ import {
   Box,
   Flex,
   HStack,
-  Icon,
-  IconButton,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Stack,
   StackDivider,
   Text,
   Container,
+  TabPanel,
 } from "@chakra-ui/react";
-import {
-  FiBookmark,
-  FiClock,
-  FiGrid,
-  FiHelpCircle,
-  FiMoreVertical,
-  FiPieChart,
-  FiSearch,
-  FiSettings,
-  // FiSun,
-  // FiMoon,
-} from "react-icons/fi";
-import { RadioCard, RadioCardGroup } from "./components/RadioCardGroup";
-import { DocumentCollapse } from "./components/DocumentCollapse";
-import { SidebarButton } from "./components/SideBarButtons";
+import { FaLinux, FaHtml5, FaCss3Alt, FaJsSquare } from "react-icons/fa";
+import { Collapse, RadioCard, RadioCardGroup, Tabs } from "./components";
+
+const QuizPanel = () => {
+  return (
+    <TabPanel>
+      <Stack spacing="1">
+        <Collapse
+          icon={FaLinux}
+          name="Linux"
+          quizzes={["Resumes", "Cover Letter", "Personal", "Education"]}
+        />
+        <Collapse
+          icon={FaHtml5}
+          name="HTML"
+          quizzes={["Resumes", "Cover Letter", "Personal", "Education"]}
+        />
+        <Collapse
+          icon={FaCss3Alt}
+          name="CSS"
+          quizzes={["Resumes", "Cover Letter", "Personal", "Education"]}
+        />
+        <Collapse
+          icon={FaJsSquare}
+          name="JavaScript"
+          quizzes={["Resumes", "Cover Letter", "Personal", "Education"]}
+        />
+      </Stack>
+    </TabPanel>
+  );
+};
+
+const FlashcardsPanel = () => {
+  return (
+    <TabPanel>
+      <Stack spacing="1">
+        <Collapse
+          icon={FaHtml5}
+          name="HTML"
+          quizzes={["Resumes", "Cover Letter", "Personal", "Education"]}
+        />
+        <Collapse
+          icon={FaCss3Alt}
+          name="CSS"
+          quizzes={["Resumes", "Cover Letter", "Personal", "Education"]}
+        />
+        <Collapse
+          icon={FaJsSquare}
+          name="JavaScript"
+          quizzes={["Resumes", "Cover Letter", "Personal", "Education"]}
+        />
+        <Collapse
+          icon={FaLinux}
+          name="Linux"
+          quizzes={["Resumes", "Cover Letter", "Personal", "Education"]}
+        />
+      </Stack>
+    </TabPanel>
+  );
+};
 
 function App() {
   return (
@@ -43,45 +84,26 @@ function App() {
         justifyContent="space-between"
       >
         <Stack spacing="8">
-          <InputGroup>
-            <InputLeftElement>
-              <Icon as={FiSearch} color="fg.muted" fontSize="lg" />
-            </InputLeftElement>
-            <Input placeholder="Search" />
-          </InputGroup>
-          <Stack spacing="1">
-            <SidebarButton leftIcon={<FiGrid />}>Dashboard</SidebarButton>
-            <SidebarButton leftIcon={<FiPieChart />}>Analysis</SidebarButton>
-            <DocumentCollapse />
-            <SidebarButton leftIcon={<FiClock />}>History</SidebarButton>
-            <SidebarButton leftIcon={<FiBookmark />}>Favorites</SidebarButton>
-          </Stack>
+          <Tabs tabs={["Quiz", "Flashcards"]}>
+            <QuizPanel />
+            <FlashcardsPanel />
+          </Tabs>
         </Stack>
         <Stack spacing="4" divider={<StackDivider />}>
           <Box />
-          <Stack spacing="1">
-            <SidebarButton leftIcon={<FiHelpCircle />}>
-              Help Center
-            </SidebarButton>
-            <SidebarButton leftIcon={<FiSettings />}>Settings</SidebarButton>
-          </Stack>
-          <HStack spacing="3" justify="space-between">
-            <HStack spacing="3">
-              <Avatar boxSize="10" src="https://i.pravatar.cc/300" />
-              <Box>
-                <Text textStyle="sm" fontWeight="medium">
-                  John Doe
-                </Text>
-                <Text textStyle="sm" color="fg.muted">
-                  john@chakra-ui.com
-                </Text>
-              </Box>
-            </HStack>
-            <IconButton
-              variant="tertiary"
-              icon={<FiMoreVertical />}
-              aria-label="Open Menu"
+          <HStack spacing="3">
+            <Avatar
+              boxSize="10"
+              src="https://chriswhite.rocks/_next/static/media/cw_rocks.e70c0e56.png"
             />
+            <Box>
+              <Text textStyle="sm" fontWeight="medium">
+                Chris White Rocks
+              </Text>
+              <Text textStyle="sm" color="fg.muted">
+                chris@chriswhite.rocks
+              </Text>
+            </Box>
           </HStack>
         </Stack>
       </Stack>
