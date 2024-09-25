@@ -23,7 +23,7 @@ export function Quiz({ questionNum, setQuestionNum, data }: Props) {
     }
   };
 
-  const { command, question, choices, correctAnswer } = data[questionNum];
+  const { question, choices } = data[questionNum];
 
   return (
     <Container centerContent={true} maxW="100%">
