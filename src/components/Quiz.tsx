@@ -1,55 +1,15 @@
-import { useState, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Box, Stack, Text, Container } from "@chakra-ui/react";
 import { RadioCard, RadioCardGroup } from "./RadioCardGroup";
 import { Pagination } from "./Pagination";
-// import { useQuizStore } from "./stores";
 
-const defaultQuizData = [
-  {
-    command: "No command, just kewlness.",
-    question: "Oops, we can't find that quiz!",
-    choices: [
-      "Find a new quiz.",
-      "Quit for the day.",
-      "Try the flashcards feature.",
-      "Choose this answer.",
-    ],
-    correctAnswer: "Find a new quiz",
-  },
-];
+type Props = {
+  questionNum: number;
+  setQuestionNum: Dispatch<SetStateAction<number>>;
+  data: Data;
+};
 
-export function Quiz() {
-  const [data, setData] = useState();
-  const [error, setError] = useState<string>();
-  const [page, setPage] = useState(1);
-  // const { scores } = useQuizStore();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/data/quiz_data/linux_quiz.json");
-
-        if (!response.ok) {
-          throw new Error("That file may not exist.");
-        }
-
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message); // Safe to access error.message here
-        } else {
-          setError("An unknown error occurred");
-        }
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const quizData = (data && Object.values(data)[0]) ?? defaultQuizData;
-  const question = quizData[page];
-
+export function Quiz({ questionNum, setQuestionNum, data }: Props) {
   const optionLabel = (index: number) => {
     switch (true) {
       case index === 0:
@@ -63,59 +23,47 @@ export function Quiz() {
     }
   };
 
-  if (error) {
-    return <div className="error-message">Error: {error}</div>;
-  }
-
-  if (!data) {
-    return <div>Loading...</div>;
-  }
+  const { command, question, choices, correctAnswer } = data[questionNum];
 
   return (
-    <Stack>
-      <Box as="section" bg="bg.surface" py={{ base: "4", md: "8" }}>
-        <Container>
-          <Box
-            bg="bg.surface"
-            px={{ base: "4", md: "6" }}
-            py="5"
-            boxShadow="sm"
-            borderRadius="lg"
-          >
-            <Stack spacing="1">
-              <Text textStyle="lg" fontWeight="medium">
-                Question:
+    <Container centerContent={true} maxW="100%">
+      <Box w="100%" as="section" bg="bg.surface" py={{ base: "4", md: "8" }}>
+        <Box
+          bg="bg.surface"
+          px={{ base: "4", md: "6" }}
+          py="5"
+          boxShadow="sm"
+          borderRadius="lg"
+        >
+          <Stack spacing="1">
+            <Text textStyle="lg" fontWeight="medium">
+              Question:
+            </Text>
+            <Text textStyle="sm" color="fg.muted">
+              {question}
+            </Text>
+          </Stack>
+        </Box>
+        <RadioCardGroup defaultValue="one" spacing="3">
+          {choices.map((option, i) => (
+            <RadioCard key={option} value={option}>
+              <Text color="fg.emphasized" fontWeight="medium" fontSize="sm">
+                Option {optionLabel(i)}
               </Text>
-              <Text textStyle="sm" color="fg.muted">
-                {question.question}
+              <Text color="fg.muted" textStyle="sm">
+                {option}
               </Text>
-            </Stack>
-          </Box>
-        </Container>
-        <Container maxW="lg">
-          <RadioCardGroup defaultValue="one" spacing="3">
-            {question.choices.map((option, i) => (
-              <RadioCard key={option} value={option}>
-                <Text color="fg.emphasized" fontWeight="medium" fontSize="sm">
-                  Option {optionLabel(i)}
-                </Text>
-                <Text color="fg.muted" textStyle="sm">
-                  {option}
-                </Text>
-              </RadioCard>
-            ))}
-          </RadioCardGroup>
-        </Container>
-        <Container py={{ base: "12", md: "16" }}>
-          <Pagination
-            count={quizData.length}
-            pageSize={1}
-            siblingCount={0}
-            page={page}
-            onPageChange={(e) => setPage(e.page)}
-          />
-        </Container>
+            </RadioCard>
+          ))}
+        </RadioCardGroup>
+        <Pagination
+          count={data.length}
+          pageSize={1}
+          siblingCount={1}
+          page={questionNum}
+          onPageChange={(e) => setQuestionNum(e.page)}
+        />
       </Box>
-    </Stack>
+    </Container>
   );
 }
