@@ -1,15 +1,16 @@
 import {
-  Avatar,
   Box,
-  Container,
   HStack,
+  useBreakpointValue,
+  useDisclosure,
   Drawer,
   DrawerBody,
   DrawerContent,
-  Stack,
+  DrawerProps,
   StackDivider,
-  useDisclosure,
+  Stack,
   Text,
+  Avatar,
 } from "@chakra-ui/react";
 import { ToggleButton } from "./Button";
 import { QuizPanel, FlashcardPanel } from "./Panels";
@@ -22,10 +23,7 @@ const ProfileStack = () => {
         Provided with ❤️ by:
       </Text>
       <HStack spacing="4">
-        <Avatar
-          boxSize="10"
-          src="https://chriswhite.rocks/_next/static/media/cw_rocks.e70c0e56.png"
-        />
+        <Avatar boxSize="10" src="/cw_rocks.png" />
         <Box>
           <Text textStyle="sm" fontWeight="medium">
             Chris White
@@ -39,55 +37,42 @@ const ProfileStack = () => {
   );
 };
 
-const MobileDrawer = () => {
-  const { isOpen, onToggle, onClose } = useDisclosure();
+const MobileDrawer = (props: Omit<DrawerProps, "children">) => {
+  return (
+    <Drawer placement="right" {...props}>
+      <DrawerContent>
+        <DrawerBody mt="16">
+          <Stack spacing="6" align="stretch">
+            <Tabs tabs={["Quiz", "Flashcards"]}>
+              <QuizPanel />
+              <FlashcardPanel />
+            </Tabs>
+          </Stack>
+          <ProfileStack />
+        </DrawerBody>
+      </DrawerContent>
+    </Drawer>
+  );
+};
+
+const MobileNavigation = () => {
+  const mobileNavbar = useDisclosure();
   return (
     <>
       <ToggleButton
-        isOpen={isOpen}
-        onClick={onToggle}
-        aria-label="Open menu"
-        display={{ base: "inline-flex", lg: "none" }}
+        onClick={mobileNavbar.onToggle}
+        isOpen={mobileNavbar.isOpen}
+        aria-label="Open Menu"
       />
-      <Drawer placement="top" isOpen={isOpen} onClose={onClose}>
-        <DrawerContent>
-          <DrawerBody mt="56px" p="4">
-            <Stack spacing="1">
-              <Tabs tabs={["Quiz", "Flashcards"]}>
-                <QuizPanel />
-                <FlashcardPanel />
-              </Tabs>
-            </Stack>
-            <ProfileStack />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <MobileDrawer
+        isOpen={mobileNavbar.isOpen}
+        onClose={mobileNavbar.onClose}
+      />
     </>
   );
 };
 
-export const MobileNavigation = () => (
-  <Box as="section" minH="lg">
-    <Box
-      borderBottomWidth="1px"
-      bg="bg.surface"
-      position="relative"
-      zIndex="tooltip"
-    >
-      <Container py="4">
-        <HStack justify="space-between" spacing="8">
-          <HStack spacing="10">
-            <HStack spacing="3">
-              <MobileDrawer />
-            </HStack>
-          </HStack>
-        </HStack>
-      </Container>
-    </Box>
-  </Box>
-);
-
-export const SidebarNavigation = () => {
+const SidebarNavigation = () => {
   return (
     <Stack
       flex="1"
@@ -98,7 +83,7 @@ export const SidebarNavigation = () => {
       borderRightWidth="1px"
       justifyContent="space-between"
     >
-      <Stack spacing="8">
+      <Stack spacing="2">
         <Tabs tabs={["Quiz", "Flashcards"]}>
           <QuizPanel />
           <FlashcardPanel />
@@ -110,4 +95,9 @@ export const SidebarNavigation = () => {
       </Stack>
     </Stack>
   );
+};
+
+export const NavigationLayout = () => {
+  const isDesktop = useBreakpointValue({ base: false, lg: true });
+  return <>{isDesktop ? <SidebarNavigation /> : <MobileNavigation />}</>;
 };

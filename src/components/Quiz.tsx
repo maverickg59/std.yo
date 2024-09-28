@@ -1,33 +1,27 @@
-import { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import { Box, Stack, Text, Container } from "@chakra-ui/react";
 import { RadioCard, RadioCardGroup } from "./RadioCardGroup";
 import { Pagination } from "./Pagination";
 
 type Props = {
-  questionNum: number;
-  setQuestionNum: Dispatch<SetStateAction<number>>;
   data: Data;
 };
 
-export function Quiz({ questionNum, setQuestionNum, data }: Props) {
-  const optionLabel = (index: number) => {
-    switch (true) {
-      case index === 0:
-        return "A";
-      case index === 1:
-        return "B";
-      case index === 2:
-        return "C";
-      default:
-        return "D";
-    }
-  };
+function getPageItem(page: number, arr: Question[]): Question {
+  return arr[page - 1];
+}
 
-  const { question, choices } = data[questionNum];
+export function Quiz({ data }: Props) {
+  const { quiz_name, questions } = data;
+  const [questionNum, setQuestionNum] = useState(1);
+  const { question, choices } = getPageItem(questionNum, questions);
 
   return (
     <Container centerContent={true} maxW="100%">
       <Box w="100%" as="section" bg="bg.surface" py={{ base: "4", md: "8" }}>
+        <Text textStyle="lg" fontWeight="medium">
+          {quiz_name}
+        </Text>
         <Box
           bg="bg.surface"
           px={{ base: "4", md: "6" }}
@@ -45,19 +39,20 @@ export function Quiz({ questionNum, setQuestionNum, data }: Props) {
           </Stack>
         </Box>
         <RadioCardGroup defaultValue="one" spacing="3">
-          {choices.map((option, i) => (
-            <RadioCard key={option} value={option}>
+          {Object.entries(choices).map(([key, value]) => (
+            <RadioCard key={`${key}${value}`} value={value}>
               <Text color="fg.emphasized" fontWeight="medium" fontSize="sm">
-                Option {optionLabel(i)}
+                Option {key}
               </Text>
               <Text color="fg.muted" textStyle="sm">
-                {option}
+                {value}
               </Text>
             </RadioCard>
           ))}
         </RadioCardGroup>
+        {/* array is 0-9, page is 1-10 */}
         <Pagination
-          count={data.length}
+          count={questions.length}
           pageSize={1}
           siblingCount={1}
           page={questionNum}

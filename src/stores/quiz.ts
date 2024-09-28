@@ -16,11 +16,7 @@ type QuizState = {
 export const useQuizStore = create<QuizState>()(
   persist(
     (set) => ({
-      scores: {
-        linux: {
-          1234: 5,
-        },
-      },
+      scores: {},
       addScore: (subject: string, quizId: string, score: number) => {
         set((state) => ({
           scores: {

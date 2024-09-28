@@ -1,2 +1,2 @@
 export { Quiz } from "./Quiz";
-export { SidebarNavigation, MobileNavigation } from "./Navigation";
+export { NavigationLayout } from "./Navigation";

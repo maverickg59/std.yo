@@ -1,112 +1,108 @@
-export const linuxCommandsQuiz: Data = [
-  {
-    command: "ls",
-    question: "What does the 'ls' command do?",
-    choices: [
-      "Lists directory contents",
-      "Creates a new directory",
-      "Deletes a file",
-      "Moves a file",
-    ],
-    correctAnswer: "Lists directory contents",
-  },
-  {
-    command: "cd",
-    question: "What does the 'cd' command do?",
-    choices: [
-      "Changes the current directory",
-      "Copies a directory",
-      "Creates a new file",
-      "Displays the contents of a file",
-    ],
-    correctAnswer: "Changes the current directory",
-  },
-  {
-    command: "pwd",
-    question: "What does the 'pwd' command do?",
-    choices: [
-      "Prints the current working directory",
-      "Deletes the current directory",
-      "Displays system processes",
-      "Changes file permissions",
-    ],
-    correctAnswer: "Prints the current working directory",
-  },
-  {
-    command: "mkdir",
-    question: "What does the 'mkdir' command do?",
-    choices: [
-      "Creates a new directory",
-      "Renames a directory",
-      "Deletes a directory",
-      "Lists directory contents",
-    ],
-    correctAnswer: "Creates a new directory",
-  },
-  {
-    command: "rm",
-    question: "What does the 'rm' command do?",
-    choices: [
-      "Removes files or directories",
-      "Renames a file",
-      "Moves a file",
-      "Displays file contents",
-    ],
-    correctAnswer: "Removes files or directories",
-  },
-  {
-    command: "cp",
-    question: "What does the 'cp' command do?",
-    choices: [
-      "Copies files or directories",
-      "Changes file permissions",
-      "Moves files",
-      "Displays running processes",
-    ],
-    correctAnswer: "Copies files or directories",
-  },
-  {
-    command: "mv",
-    question: "What does the 'mv' command do?",
-    choices: [
-      "Moves or renames files or directories",
-      "Copies files or directories",
-      "Deletes a file",
-      "Displays system uptime",
-    ],
-    correctAnswer: "Moves or renames files or directories",
-  },
-  {
-    command: "cat",
-    question: "What does the 'cat' command do?",
-    choices: [
-      "Concatenates and displays file contents",
-      "Displays system logs",
-      "Deletes a file",
-      "Creates a symbolic link",
-    ],
-    correctAnswer: "Concatenates and displays file contents",
-  },
-  {
-    command: "chmod",
-    question: "What does the 'chmod' command do?",
-    choices: [
-      "Changes file permissions",
-      "Compresses files",
-      "Displays memory usage",
-      "Changes ownership of a file",
-    ],
-    correctAnswer: "Changes file permissions",
-  },
-  {
-    command: "top",
-    question: "What does the 'top' command do?",
-    choices: [
-      "Displays real-time system processes",
-      "Creates a new file",
-      "Shows disk usage",
-      "Displays the current time",
-    ],
-    correctAnswer: "Displays real-time system processes",
-  },
-];
+export const linuxCommandsQuiz: Data = {
+  quiz_name: "Linux Commands Quiz",
+  quiz_id: 10001,
+  category_id: 1,
+  category_name: "linux",
+  questions: [
+    {
+      question: "What does the 'ls' command do?",
+      choices: {
+        A: "Moves a file",
+        B: "Creates a new directory",
+        C: "Deletes a file",
+        D: "Lists directory contents",
+      },
+      correctAnswer: "D",
+    },
+    {
+      question: "What does the 'pwd' command do?",
+      choices: {
+        A: "Prints files to the screen",
+        B: "Deletes a file",
+        C: "Displays the current working directory",
+        D: "Creates a new directory",
+      },
+      correctAnswer: "C",
+    },
+    {
+      question: "What does the 'cd' command do?",
+      choices: {
+        A: "Lists directory contents",
+        B: "Changes the current directory",
+        C: "Deletes a directory",
+        D: "Copies a file",
+      },
+      correctAnswer: "B",
+    },
+    {
+      question: "What does the 'mkdir' command do?",
+      choices: {
+        A: "Moves a file",
+        B: "Copies a file",
+        C: "Creates a new directory",
+        D: "Deletes a directory",
+      },
+      correctAnswer: "C",
+    },
+    {
+      question: "What does the 'rm' command do?",
+      choices: {
+        A: "Deletes files",
+        B: "Renames a file",
+        C: "Lists directory contents",
+        D: "Moves a file",
+      },
+      correctAnswer: "A",
+    },
+    {
+      question: "What does the 'cp' command do?",
+      choices: {
+        A: "Copies files or directories",
+        B: "Changes directory",
+        C: "Lists directory contents",
+        D: "Renames a file",
+      },
+      correctAnswer: "A",
+    },
+    {
+      question: "What does the 'mv' command do?",
+      choices: {
+        A: "Moves or renames a file",
+        B: "Creates a directory",
+        C: "Deletes a file",
+        D: "Changes the current directory",
+      },
+      correctAnswer: "A",
+    },
+    {
+      question: "What does the 'cat' command do?",
+      choices: {
+        A: "Copies a file",
+        B: "Lists file sizes",
+        C: "Concatenates and displays file content",
+        D: "Deletes a file",
+      },
+      correctAnswer: "C",
+    },
+    {
+      question: "What does the 'echo' command do?",
+      choices: {
+        A: "Displays a line of text",
+        B: "Lists directories",
+        C: "Renames a file",
+        D: "Deletes a file",
+      },
+      correctAnswer: "A",
+    },
+    {
+      question: "What does the 'man' command do?",
+      choices: {
+        A: "Changes directory",
+        B: "Displays the manual for a command",
+        C: "Deletes a file",
+        D: "Creates a new file",
+      },
+      correctAnswer: "B",
+    },
+  ],
+};

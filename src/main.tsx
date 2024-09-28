@@ -2,31 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import {
-  ChakraProvider,
-  extendTheme,
-  // type ThemeConfig,
-} from "@chakra-ui/react";
-import { theme } from "@chakra-ui/pro-theme";
-
-// const themeConfig: ThemeConfig = {
-//   initialColorMode: "dark",
-//   useSystemColorMode: false,
-// };
-
-// const darkTheme = extendTheme(themeConfig);
-
-const extendedTheme = extendTheme(theme);
-
-const proThemeConfig = {
-  colors: { ...extendedTheme.colors, brand: extendedTheme.colors.teal },
-};
-
-const proTheme = extendTheme(proThemeConfig, extendedTheme);
+import { ChakraProvider } from "@chakra-ui/react";
+import { chakraProTheme } from "./theme.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ChakraProvider theme={proTheme}>
+    <ChakraProvider theme={chakraProTheme}>
       <App />
     </ChakraProvider>
   </StrictMode>
