@@ -1,10 +1,11 @@
-export const linuxCommandsQuiz: Data = {
+export const linuxCommandsQuiz: QuizData = {
   quiz_name: "Linux Commands Quiz",
   quiz_id: 10001,
   category_id: 1,
   category_name: "linux",
   questions: [
     {
+      questionId: 1,
       question: "What does the 'ls' command do?",
       choices: {
         A: "Moves a file",
@@ -13,8 +14,10 @@ export const linuxCommandsQuiz: Data = {
         D: "Lists directory contents",
       },
       correctAnswer: "D",
+      chosenAnswer: "",
     },
     {
+      questionId: 2,
       question: "What does the 'pwd' command do?",
       choices: {
         A: "Prints files to the screen",
@@ -23,8 +26,10 @@ export const linuxCommandsQuiz: Data = {
         D: "Creates a new directory",
       },
       correctAnswer: "C",
+      chosenAnswer: "",
     },
     {
+      questionId: 3,
       question: "What does the 'cd' command do?",
       choices: {
         A: "Lists directory contents",
@@ -33,8 +38,10 @@ export const linuxCommandsQuiz: Data = {
         D: "Copies a file",
       },
       correctAnswer: "B",
+      chosenAnswer: "",
     },
     {
+      questionId: 4,
       question: "What does the 'mkdir' command do?",
       choices: {
         A: "Moves a file",
@@ -43,8 +50,10 @@ export const linuxCommandsQuiz: Data = {
         D: "Deletes a directory",
       },
       correctAnswer: "C",
+      chosenAnswer: "",
     },
     {
+      questionId: 5,
       question: "What does the 'rm' command do?",
       choices: {
         A: "Deletes files",
@@ -53,8 +62,10 @@ export const linuxCommandsQuiz: Data = {
         D: "Moves a file",
       },
       correctAnswer: "A",
+      chosenAnswer: "",
     },
     {
+      questionId: 6,
       question: "What does the 'cp' command do?",
       choices: {
         A: "Copies files or directories",
@@ -63,8 +74,10 @@ export const linuxCommandsQuiz: Data = {
         D: "Renames a file",
       },
       correctAnswer: "A",
+      chosenAnswer: "",
     },
     {
+      questionId: 7,
       question: "What does the 'mv' command do?",
       choices: {
         A: "Moves or renames a file",
@@ -73,8 +86,10 @@ export const linuxCommandsQuiz: Data = {
         D: "Changes the current directory",
       },
       correctAnswer: "A",
+      chosenAnswer: "",
     },
     {
+      questionId: 8,
       question: "What does the 'cat' command do?",
       choices: {
         A: "Copies a file",
@@ -83,8 +98,10 @@ export const linuxCommandsQuiz: Data = {
         D: "Deletes a file",
       },
       correctAnswer: "C",
+      chosenAnswer: "",
     },
     {
+      questionId: 9,
       question: "What does the 'echo' command do?",
       choices: {
         A: "Displays a line of text",
@@ -93,8 +110,10 @@ export const linuxCommandsQuiz: Data = {
         D: "Deletes a file",
       },
       correctAnswer: "A",
+      chosenAnswer: "",
     },
     {
+      questionId: 10,
       question: "What does the 'man' command do?",
       choices: {
         A: "Changes directory",
@@ -103,6 +122,7 @@ export const linuxCommandsQuiz: Data = {
         D: "Creates a new file",
       },
       correctAnswer: "B",
+      chosenAnswer: "",
     },
   ],
 };

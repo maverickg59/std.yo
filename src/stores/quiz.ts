@@ -1,39 +1,34 @@
 import { create } from "zustand";
+import { produce } from "immer";
 import { persist } from "zustand/middleware";
+import { linuxCommandsQuiz } from "../data";
 
-type Scores = {
-  [subject: string]: {
-    [quizId: string]: number;
-  };
+type QuizState = { quizData: QuizData };
+
+type QuizActions = {
+  setChosenAnswer: SetChosenAnswer;
+  resetQuizData: () => void;
 };
 
-type QuizState = {
-  scores: Scores;
-  addScore: (subject: string, quizId: string, score: number) => void;
-  // getScore: (subject: string, quizId: string) => number;
-};
-
-export const useQuizStore = create<QuizState>()(
+export const useQuizStore = create<QuizState & QuizActions>()(
   persist(
     (set) => ({
-      scores: {},
-      addScore: (subject: string, quizId: string, score: number) => {
-        set((state) => ({
-          scores: {
-            ...state.scores,
-            [subject]: {
-              ...(state.scores[subject] || {}),
-              [quizId]: score,
-            },
-          },
-        }));
-      },
-      // getScore: (subject: string, quizId: string) => {
-      //   return (state) => state.scores[subject]?.[quizId] || 0;
-      // },
+      quizData: linuxCommandsQuiz,
+      setChosenAnswer: (questionId: number, chosenAnswer: string) =>
+        set(
+          produce((state: { quizData: QuizData }) => {
+            const question = state.quizData.questions.find(
+              (q) => q.questionId === questionId
+            );
+            if (question) {
+              question.chosenAnswer = chosenAnswer;
+            }
+          })
+        ),
+      resetQuizData: () => set({ quizData: linuxCommandsQuiz }),
     }),
     {
-      name: "quiz-scores", // localStorage key
+      name: "quiz-answers",
     }
   )
 );
