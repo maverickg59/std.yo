@@ -11,6 +11,10 @@ function App() {
   return (
     <Flex as="section" minH="100vh">
       <NavigationLayout />
+      <Quiz
+        data={linuxCommandsQuiz}
+        // score={score}
+      />
       <Stack>
         {isLightMode ? (
           <FiSun onClick={() => toggleColorMode()} />
@@ -18,10 +22,6 @@ function App() {
           <FiMoon onClick={() => toggleColorMode()} />
         )}
       </Stack>
-      <Quiz
-        data={linuxCommandsQuiz}
-        // score={score}
-      />
     </Flex>
   );
 }
