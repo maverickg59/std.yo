@@ -1,19 +1,31 @@
 import { create } from "zustand";
 import { produce } from "immer";
 import { persist } from "zustand/middleware";
-import { linuxCommandsQuiz } from "../data";
+import { linux, quizzes } from "../data";
 
-type QuizState = { quizData: QuizData };
+type QuizState = {
+  quizData: QuizData;
+  quizzes: {
+    linux: QuizData[];
+    html: QuizData[];
+    css: QuizData[];
+    javascript: QuizData[];
+  };
+};
 
 type QuizActions = {
   setChosenAnswer: SetChosenAnswer;
   resetQuizData: () => void;
 };
 
+// programatically load quizzes into localstorage
+// programatically generate a set of url paths based on the quiz data
+
 export const useQuizStore = create<QuizState & QuizActions>()(
   persist(
     (set) => ({
-      quizData: linuxCommandsQuiz,
+      quizData: linux[0],
+      quizzes,
       setChosenAnswer: (questionId: number, chosenAnswer: string) =>
         set(
           produce((state: { quizData: QuizData }) => {
@@ -25,12 +37,10 @@ export const useQuizStore = create<QuizState & QuizActions>()(
             }
           })
         ),
-      resetQuizData: () => set({ quizData: linuxCommandsQuiz }),
+      resetQuizData: () => set({ quizData: linux[0] }),
     }),
     {
       name: "quiz-answers",
     }
   )
 );
-
-export default useQuizStore;

@@ -1,20 +1,15 @@
 import { Flex, Stack, useColorMode } from "@chakra-ui/react";
 import { FiSun, FiMoon } from "react-icons/fi";
-import { Quiz, NavigationLayout } from "./components";
-import { useQuizStore } from "./stores";
+import { NavigationLayout } from "../components";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  const { resetQuizData, quizData, setChosenAnswer } = useQuizStore();
   const { colorMode, toggleColorMode } = useColorMode();
   const isLightMode = colorMode === "light";
   return (
     <Flex as="section" minH="100vh">
       <NavigationLayout />
-      <Quiz
-        data={quizData}
-        setChosenAnswer={setChosenAnswer}
-        resetQuizData={resetQuizData}
-      />
+      <Outlet />
       <Stack>
         {isLightMode ? (
           <FiSun onClick={() => toggleColorMode()} />

@@ -13,7 +13,7 @@ import { FiChevronDown } from "react-icons/fi";
 
 type Props = {
   name: string;
-  quizzes: string[];
+  quizzes: QuizData[];
   icon: IconType;
 };
 
@@ -35,9 +35,9 @@ export const Collapse = ({ name, quizzes, icon }: Props) => {
       </Button>
       <ChakraCollapse in={isOpen} animateOpacity>
         <Stack spacing="1" alignItems="stretch" ps="8" py="1">
-          {quizzes.map((item) => (
-            <Button key={item} variant="tertiary" justifyContent="start">
-              {item}
+          {quizzes.map(({ quiz_name }) => (
+            <Button key={quiz_name} variant="tertiary" justifyContent="start">
+              {quiz_name}
             </Button>
           ))}
         </Stack>

@@ -9,23 +9,19 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import { RadioCard, RadioCardGroup } from "./RadioCardGroup";
-import { Pagination } from "./Pagination";
-
-type Props = {
-  data: QuizData;
-  setChosenAnswer: SetChosenAnswer;
-  resetQuizData: () => void;
-};
+import { RadioCard, RadioCardGroup } from "../components/RadioCardGroup";
+import { Pagination } from "../components/Pagination";
+import { useQuizStore } from "../stores";
 
 const getPageItem = (page: number, arr: Question[]) => {
   return arr[page - 1];
 };
 
-export function Quiz({ data, setChosenAnswer, resetQuizData }: Props) {
-  const [questionNum, setQuestionNum] = useState(1);
+function Quiz() {
   const toast = useToast();
-  const { quiz_name, questions } = data;
+  const { quizData, resetQuizData, setChosenAnswer } = useQuizStore();
+  const [questionNum, setQuestionNum] = useState(1);
+  const { quiz_name, questions } = quizData;
   const { question, questionId, choices, chosenAnswer, correctAnswer } =
     getPageItem(questionNum, questions);
   const questionCount = questions.length;
@@ -113,3 +109,5 @@ export function Quiz({ data, setChosenAnswer, resetQuizData }: Props) {
     </Container>
   );
 }
+
+export default Quiz;
