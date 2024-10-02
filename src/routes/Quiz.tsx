@@ -1,22 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Flex,
-  Spacer,
   Stack,
   Text,
   Container,
   Button,
   useToast,
-  useBreakpointValue,
+  useColorMode,
 } from "@chakra-ui/react";
+import { FaCheckCircle } from "react-icons/fa";
 import { RadioCard, RadioCardGroup, Pagination } from "../components";
 import { useQuizStore } from "../stores";
 import { useParams } from "react-router-dom";
 import { quizzes } from "../data";
 
 function Quiz() {
-  const isDesktop = useBreakpointValue({ base: false, lg: true });
+  const [reveal, setReveal] = useState(false);
   const toast = useToast();
   const { quiz_id } = useParams();
   const {
@@ -28,6 +28,7 @@ function Quiz() {
     setAnswer,
     resetAnswers,
   } = useQuizStore();
+  const { colorMode } = useColorMode();
 
   const value =
     (answers[Number(quiz_id)] && answers[Number(quiz_id)][page]) || undefined;
@@ -39,6 +40,10 @@ function Quiz() {
     }
   }, [quiz_id, setQuiz, setPage]);
 
+  useEffect(() => {
+    setReveal(false);
+  }, [page]);
+
   const handleRadioSelection = (
     e: string,
     quiz_id: number,
@@ -46,13 +51,16 @@ function Quiz() {
     correctAnswer: string
   ) => {
     setAnswer(Number(quiz_id), questionId, e);
+    const toastVariant = colorMode === "light" ? "subtle" : "solid";
     if (e === correctAnswer) {
       toast({
         title: "Great job!",
         description: "You answered that correctly!",
-        status: "success",
+        status: "info",
         duration: 1000,
         isClosable: true,
+        variant: toastVariant,
+        icon: <FaCheckCircle />,
       });
     } else {
       return toast({
@@ -61,6 +69,7 @@ function Quiz() {
         status: "error",
         duration: 1000,
         isClosable: true,
+        variant: toastVariant,
       });
     }
   };
@@ -98,7 +107,11 @@ function Quiz() {
             }
           >
             {Object.entries(choices).map(([key, value]) => (
-              <RadioCard key={value} value={key}>
+              <RadioCard
+                key={value}
+                value={key}
+                isCorrect={key === correctAnswer}
+              >
                 <Text color="fg.emphasized" fontWeight="medium" fontSize="sm">
                   Option {key}
                 </Text>
@@ -142,9 +155,21 @@ function Quiz() {
             />
           </Stack>
         </Box>
-        <Flex justifyContent={isDesktop ? "flex-end" : "center"} p="8">
-          {isDesktop && <Spacer />}
-          <Button onClick={() => resetAnswers(Number(quiz_id))}>
+        <Flex justifyContent="center" pt={4}>
+          <Text visibility={reveal ? "visible" : "hidden"}>
+            Correct Answer: {questions[page - 1].correctAnswer}
+          </Text>
+        </Flex>
+        <Flex
+          justifyContent="space-between"
+          px={8}
+          pt={{ base: "4", md: "0" }}
+          pb={8}
+        >
+          <Button variant="text" onClick={() => setReveal(!reveal)}>
+            Reveal Answer
+          </Button>
+          <Button variant="text" onClick={() => resetAnswers(Number(quiz_id))}>
             Reset Answers
           </Button>
         </Flex>

@@ -1,7 +1,4 @@
 1. create flashcards
-2. CSS updates to prettify
-
-- notify user of quiz answer selection status with red/green highlight
 
 ### Disclaimer: I've used ChatGPT to generate the content for these quizzes.
 
@@ -12,9 +9,9 @@
 Generate individual quiz questions:
 
 ```
-first, randomly choose a key between A, B, C, and D to which you'll assign a correct answer.
+1. Randomly choose a key between A, B, C, and D to which you'll assign a correct answer.
 
-second, consider the following format:
+2. Consider the following format:
 choices: {
 A: "Sets a CSS property",
 B: "Sets the text color",
@@ -22,7 +19,7 @@ C: "Sets the border color",
 D: "Sets the font size",
 }
 
-third, give me one correct answer and three plausible, but incorrect answers to the following question:
+3. Give me one correct answer and three plausible, but incorrect answers to the following question:
 
 What does the 'font-size' property do?
 ```

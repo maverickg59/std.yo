@@ -10,7 +10,6 @@ import {
   useRadio,
   useRadioGroup,
   UseRadioProps,
-  useStyleConfig,
 } from "@chakra-ui/react";
 import {
   Children,
@@ -19,6 +18,7 @@ import {
   ReactElement,
   useMemo,
 } from "react";
+import { RxCross2 } from "react-icons/rx";
 
 interface RadioCardGroupProps<T> extends Omit<StackProps, "onChange"> {
   name?: string;
@@ -58,17 +58,17 @@ export const RadioCardGroup = <T extends string>(
 interface RadioCardProps extends BoxProps {
   value: string;
   radioProps?: UseRadioProps;
+  isCorrect?: boolean;
 }
 
 export const RadioCard = (props: RadioCardProps) => {
-  const { radioProps, children, ...rest } = props;
-  const { getInputProps, getCheckboxProps, getLabelProps, state } =
+  const { radioProps, children, isCorrect, ...rest } = props;
+  const { getInputProps, getRadioProps, getLabelProps, state } =
     useRadio(radioProps);
   const id = useId(undefined, "radio-button");
 
-  const styles = useStyleConfig("RadioCard", props);
   const inputProps = getInputProps();
-  const checkboxProps = getCheckboxProps();
+  const checkboxProps = getRadioProps();
   const labelProps = getLabelProps();
   return (
     <Box
@@ -83,12 +83,28 @@ export const RadioCard = (props: RadioCardProps) => {
       }}
     >
       <input {...inputProps} aria-labelledby={id} />
-      <Box sx={styles} {...checkboxProps} {...rest}>
+      <Box
+        {...checkboxProps}
+        borderWidth="2px"
+        _checked={
+          isCorrect ? { borderColor: "accent" } : { borderColor: "red.500" }
+        }
+        borderRadius={10}
+        _focus={{
+          boxShadow: "outline",
+        }}
+        p={3}
+        {...rest}
+      >
         <Stack direction="row">
           <Box flex="1">{children}</Box>
           {state.isChecked ? (
-            <Circle bg="accent" size="4">
-              <Icon as={CheckIcon} boxSize="2.5" color="fg.inverted" />
+            <Circle bg={isCorrect ? "accent" : "tomato"} size="4">
+              <Icon
+                as={isCorrect ? CheckIcon : RxCross2}
+                boxSize={isCorrect ? "2.5" : "3.5"}
+                color="fg.inverted"
+              />
             </Circle>
           ) : (
             <Circle borderWidth="2px" size="4" />
