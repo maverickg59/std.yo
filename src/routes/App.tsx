@@ -1,22 +1,16 @@
-import { Flex, Stack, useColorMode } from "@chakra-ui/react";
-import { FiSun, FiMoon } from "react-icons/fi";
-import { NavigationLayout } from "../components";
+import { Flex, useBreakpointValue } from "@chakra-ui/react";
+import { SidebarNavigation, HeaderNavigation } from "../components";
 import { Outlet } from "react-router-dom";
 
 function App() {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const isLightMode = colorMode === "light";
+  const isDesktop = useBreakpointValue({ base: false, lg: true });
   return (
-    <Flex as="section" minH="100vh">
-      <NavigationLayout />
-      <Outlet />
-      <Stack>
-        {isLightMode ? (
-          <FiSun onClick={() => toggleColorMode()} />
-        ) : (
-          <FiMoon onClick={() => toggleColorMode()} />
-        )}
-      </Stack>
+    <Flex direction="column" minH="100vh">
+      <HeaderNavigation />
+      <Flex as="section" flex="1">
+        {isDesktop && <SidebarNavigation />}
+        <Outlet />
+      </Flex>
     </Flex>
   );
 }
