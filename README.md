@@ -2,7 +2,6 @@
 2. CSS updates to prettify
 
 - notify user of quiz answer selection status with red/green highlight
-- padding around reset answers button
 - quiz links need full-width
 - mobile nav menu layout
 

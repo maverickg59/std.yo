@@ -8,6 +8,7 @@ import {
   Container,
   Button,
   useToast,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { RadioCard, RadioCardGroup, Pagination } from "../components";
 import { useQuizStore } from "../stores";
@@ -15,6 +16,7 @@ import { useParams } from "react-router-dom";
 import { quizzes } from "../data";
 
 function Quiz() {
+  const isDesktop = useBreakpointValue({ base: false, lg: true });
   const toast = useToast();
   const { quiz_id } = useParams();
   const {
@@ -114,7 +116,7 @@ function Quiz() {
 
   return (
     <Container centerContent={true} maxW="100%">
-      <Box w="100%" as="section" bg="bg.surface" py={{ base: "4", md: "8" }}>
+      <Box w="100%" as="section" bg="bg.surface" pt={{ base: "4", md: "8" }}>
         <Box
           bg="bg.surface"
           px={{ base: "4", md: "6" }}
@@ -140,8 +142,8 @@ function Quiz() {
             />
           </Stack>
         </Box>
-        <Flex>
-          <Spacer />
+        <Flex justifyContent={isDesktop ? "flex-end" : "center"} p="8">
+          {isDesktop && <Spacer />}
           <Button onClick={() => resetAnswers(Number(quiz_id))}>
             Reset Answers
           </Button>
