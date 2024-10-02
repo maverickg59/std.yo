@@ -27,9 +27,11 @@ function Quiz() {
     resetAnswers,
   } = useQuizStore();
 
+  const value =
+    (answers[Number(quiz_id)] && answers[Number(quiz_id)][page]) || undefined;
+
   useEffect(() => {
     const quiz = quizzes.find((quiz) => quiz.quiz_id === Number(quiz_id));
-    setPage(1);
     if (quiz) {
       setQuiz(quiz);
     }
@@ -61,7 +63,13 @@ function Quiz() {
     }
   };
 
-  const QuestionRadioGroup = (page: number, questions: Question[]) => {
+  type RCGQProps = {
+    page: number;
+    questions: Question[];
+    value: string | undefined;
+  };
+
+  const RadioCardGroupQuestion = ({ page, questions, value }: RCGQProps) => {
     const questionComponents = questions.map(
       ({ question, questionId, choices, correctAnswer }, i) => (
         <>
@@ -75,7 +83,7 @@ function Quiz() {
           </Stack>
           <RadioCardGroup
             key={question}
-            value={answers[Number(quiz_id)] && answers[Number(quiz_id)][page]}
+            value={value}
             name={question}
             spacing="8"
             onChange={(e) =>
@@ -118,7 +126,11 @@ function Quiz() {
             <Text textStyle="lg" fontWeight="medium">
               {quiz_name}
             </Text>
-            {QuestionRadioGroup(page, questions)}
+            <RadioCardGroupQuestion
+              page={page}
+              questions={questions}
+              value={value}
+            />
             <Pagination
               count={questions.length}
               pageSize={1}

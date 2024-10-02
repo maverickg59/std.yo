@@ -22,7 +22,7 @@ export const useQuizStore = create<QuizState & QuizActions>()(
       quiz: defaultQuiz,
       page: 1,
       setPage: (page) => set((state) => ({ ...state, page })),
-      setQuiz: (quiz) => set((state) => ({ ...state, quiz })),
+      setQuiz: (quiz) => set((state) => ({ ...state, quiz, page: 1 })),
       setAnswer: (quiz_id, question_id, answer) => {
         set((state) => ({
           ...state,
@@ -32,15 +32,18 @@ export const useQuizStore = create<QuizState & QuizActions>()(
           },
         }));
       },
-      resetAnswers: (quiz_id) => {
-        const localStorageState = localStorage.getItem("std.y-answers");
-        if (localStorageState) {
-          const newState = JSON.parse(localStorageState).state.answers;
-          delete newState[quiz_id];
-          console.log(newState);
+      resetAnswers: (quiz_id) =>
+        set((state) => {
+          const newState = {
+            ...state,
+            answers: {
+              ...state.answers,
+            },
+          };
+          delete newState.answers[quiz_id];
           localStorage.setItem("std.y-answers", JSON.stringify(newState));
-        }
-      },
+          return newState;
+        }),
     }),
     {
       name: "std.y-answers",
