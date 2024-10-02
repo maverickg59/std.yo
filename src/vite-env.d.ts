@@ -15,8 +15,6 @@ type Question = {
 type QuizData = {
   quiz_name: string;
   quiz_id: number;
-  category_id: number;
-  category_name: string;
   questions: Question[];
 };
 

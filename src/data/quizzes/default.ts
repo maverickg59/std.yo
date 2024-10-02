@@ -1,8 +1,6 @@
 export const defaultQuiz: QuizData = {
   quiz_name: "You've found the default quiz!",
   quiz_id: 10000,
-  category_id: 0,
-  category_name: "default",
   questions: [
     {
       questionId: 1,

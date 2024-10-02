@@ -8,7 +8,7 @@ export const navPaths = {
       content: [
         {
           quiz_id: 10001,
-          quiz_name: "Linux Commands Quiz",
+          quiz_name: "Linux Commands",
         },
       ],
     },
@@ -18,7 +18,7 @@ export const navPaths = {
       content: [
         {
           quiz_id: 10003,
-          quiz_name: "HTML Tags Quiz",
+          quiz_name: "HTML Tags",
         },
       ],
     },
@@ -28,7 +28,7 @@ export const navPaths = {
       content: [
         {
           quiz_id: 10004,
-          quiz_name: "CSS Atributes Quiz",
+          quiz_name: "CSS Atributes",
         },
       ],
     },
@@ -38,7 +38,7 @@ export const navPaths = {
       content: [
         {
           quiz_id: 10002,
-          quiz_name: "JavaScript Arrays Quiz",
+          quiz_name: "JavaScript Arrays",
         },
       ],
     },

@@ -1,9 +1,7 @@
 export const linux: QuizData[] = [
   {
-    quiz_name: "Linux Commands Quiz",
+    quiz_name: "Linux Commands",
     quiz_id: 10001,
-    category_id: 1,
-    category_name: "linux",
     questions: [
       {
         questionId: 1,
@@ -53,7 +51,7 @@ export const linux: QuizData[] = [
         questionId: 5,
         question: "What does the 'rm' command do?",
         choices: {
-          A: "Deletes files",
+          A: "Deletes a file",
           B: "Renames a file",
           C: "Lists directory contents",
           D: "Moves a file",
@@ -75,12 +73,12 @@ export const linux: QuizData[] = [
         questionId: 7,
         question: "What does the 'mv' command do?",
         choices: {
-          A: "Moves or renames a file",
-          B: "Creates a directory",
+          A: "Creates a directory",
+          B: "Moves or renames a file",
           C: "Deletes a file",
           D: "Changes the current directory",
         },
-        correctAnswer: "A",
+        correctAnswer: "B",
       },
       {
         questionId: 8,
@@ -97,12 +95,12 @@ export const linux: QuizData[] = [
         questionId: 9,
         question: "What does the 'echo' command do?",
         choices: {
-          A: "Displays a line of text",
-          B: "Lists directories",
-          C: "Renames a file",
-          D: "Deletes a file",
+          A: "Lists directories",
+          B: "Renames a file",
+          C: "Deletes a file",
+          D: "Outputs the strings that are passed to it",
         },
-        correctAnswer: "A",
+        correctAnswer: "D",
       },
       {
         questionId: 10,

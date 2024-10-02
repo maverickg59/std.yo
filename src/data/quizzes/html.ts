@@ -1,9 +1,7 @@
 export const html: QuizData[] = [
   {
-    quiz_name: "HTML Tags Quiz",
+    quiz_name: "HTML Tags",
     quiz_id: 10003,
-    category_id: 2,
-    category_name: "html",
     questions: [
       {
         questionId: 1,
@@ -36,7 +34,7 @@ export const html: QuizData[] = [
           C: "Defines a generic container for content",
           D: "Defines a divider to split the page in half",
         },
-        correctAnswer: "D",
+        correctAnswer: "C",
       },
       {
         questionId: 4,
@@ -108,12 +106,12 @@ export const html: QuizData[] = [
         questionId: 10,
         question: "What does the <form> tag do?",
         choices: {
-          A: "Defines a document section containing interative controls for submitting information",
-          B: "Defines the form of a child tag in the shape of a square or circle",
-          C: "Defines a pdf form that can be viewed or downloaded by the user",
-          D: "Defines a dynamic text element that sets the various linguistic forms of a verb",
+          A: "Defines the form of a child tag in the shape of a square or circle",
+          B: "Defines a pdf form that can be viewed or downloaded by the user",
+          C: "Defines a dynamic text element that sets the various linguistic forms of a verb",
+          D: "Defines a document section containing interative controls for submitting information",
         },
-        correctAnswer: "A",
+        correctAnswer: "D",
       },
     ],
   },
