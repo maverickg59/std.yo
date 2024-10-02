@@ -6,7 +6,7 @@ const { quizzes, flashcards } = navPaths;
 
 export const QuizPanel = () => {
   return (
-    <TabPanel>
+    <TabPanel p={0}>
       <Stack spacing="1">
         {Object.values(quizzes).map(
           ({ category_name, category_icon, content }) => {
@@ -27,7 +27,7 @@ export const QuizPanel = () => {
 
 export const FlashcardPanel = () => {
   return (
-    <TabPanel>
+    <TabPanel p={0}>
       <Stack spacing="1">
         {Object.values(flashcards).map(
           ({ category_name, category_icon, content }) => {

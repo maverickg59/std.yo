@@ -35,7 +35,13 @@ export const Collapse = ({ name, content, icon }: Props) => {
         <PopoverIcon isOpen={isOpen} />
       </Button>
       <ChakraCollapse in={isOpen} animateOpacity>
-        <Stack spacing="1" alignItems="stretch" ps="8" py="1">
+        <Stack
+          whiteSpace="nowrap"
+          spacing="1"
+          alignItems="stretch"
+          ps="8"
+          py="1"
+        >
           {content &&
             content.map(({ quiz_name, quiz_id }) => (
               <Link to={`quiz/${quiz_id}`} key={quiz_name}>
