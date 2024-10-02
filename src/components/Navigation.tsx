@@ -23,9 +23,11 @@ import { Link } from "react-router-dom";
 const ProfileStack = () => {
   return (
     <Stack spacing={5}>
-      <Text py={1} textStyle="sm" fontSize="md" fontWeight="medium">
-        Provided with ❤️ by:
-      </Text>
+      <HStack>
+        <Text py={1} textStyle="sm" fontSize="md" fontWeight="medium">
+          Provided with ❤️ by:
+        </Text>
+      </HStack>
       <HStack spacing="4">
         <Link to="https://chriswhite.rocks">
           <Avatar boxSize="10" src="/cw_rocks.png" />
@@ -47,8 +49,13 @@ const MobileDrawer = (props: Omit<DrawerProps, "children">) => {
   return (
     <Drawer placement="right" {...props}>
       <DrawerContent>
-        <DrawerBody mt="16">
-          <Stack spacing="6" align="stretch">
+        <DrawerBody
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          mt="16"
+        >
+          <Stack spacing="6" align="stretch" flex="1">
             <Tabs tabs={["Quiz", "Flashcards"]}>
               <QuizPanel />
               <FlashcardPanel />
@@ -81,7 +88,6 @@ const MobileNavigation = () => {
 export const SidebarNavigation = () => {
   return (
     <Stack
-      flex="1"
       maxW={{ base: "full", sm: "xs" }}
       py={{ base: "6", sm: "8" }}
       px={{ base: "4", sm: "6" }}

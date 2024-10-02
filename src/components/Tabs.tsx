@@ -17,7 +17,7 @@ type Props = {
 export const Tabs = ({ tabs, children }: Props) => (
   <Container py={{ base: "1", md: "3" }}>
     <Stack spacing="8">
-      <ChakraTabs size={"md"} variant="indicator">
+      <ChakraTabs align="center" size={"md"} variant="indicator">
         <TabList>
           {tabs.map((tabName) => {
             return <Tab key={tabName}>{tabName}</Tab>;

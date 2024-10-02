@@ -2,11 +2,12 @@
 2. CSS updates to prettify
 
 - notify user of quiz answer selection status with red/green highlight
-- mobile nav menu layout
 
 ### Disclaimer: I've used ChatGPT to generate the content for these quizzes.
 
-<strong>Here are some of my prompts:</strong>
+## <strong>Here are some of my prompts:</strong>
+
+---
 
 Generate individual quiz questions:
 
@@ -25,6 +26,8 @@ third, give me one correct answer and three plausible, but incorrect answers to 
 
 What does the 'font-size' property do?
 ```
+
+---
 
 Generate a quiz:
 
