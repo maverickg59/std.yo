@@ -3,5 +3,5 @@ import { html } from "./quizzes/html";
 import { css } from "./quizzes/css";
 import { javascript } from "./quizzes/javascript";
 export { defaultQuiz } from "./quizzes/default";
-export { navPaths } from "./navigation";
+export { navPaths, appFeatures } from "./navigation";
 export const quizzes = [...linux, ...html, ...css, ...javascript];

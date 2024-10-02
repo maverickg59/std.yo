@@ -1,13 +1,14 @@
 1. create flashcards
-2. home page description
-3. CSS updates to prettify
+2. CSS updates to prettify
 
 - notify user of quiz answer selection status with red/green highlight
 - padding around reset answers button
 - quiz links need full-width
 - mobile nav menu layout
 
-### Disclaimer: I've used ChatGPT to generate the content for these quizzes. Here are some of my prompts:
+### Disclaimer: I've used ChatGPT to generate the content for these quizzes.
+
+<strong>Here are some of my prompts:</strong>
 
 Generate individual quiz questions:
 

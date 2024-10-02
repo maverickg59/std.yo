@@ -107,7 +107,7 @@ export const HeaderNavigation = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isLightMode = colorMode === "light";
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const iconSize = isMobile ? 20 : 30;
+  const iconSize = isMobile ? 20 : 25;
   return (
     <Box as="section">
       <Box borderBottomWidth="1px" bg="bg.surface">
