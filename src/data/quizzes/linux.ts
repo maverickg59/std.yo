@@ -1,4 +1,4 @@
-export const linux = [
+export const linux: QuizData[] = [
   {
     quiz_name: "Linux Commands Quiz",
     quiz_id: 10001,
@@ -15,7 +15,6 @@ export const linux = [
           D: "Lists directory contents",
         },
         correctAnswer: "D",
-        chosenAnswer: "",
       },
       {
         questionId: 2,
@@ -27,7 +26,6 @@ export const linux = [
           D: "Creates a new directory",
         },
         correctAnswer: "C",
-        chosenAnswer: "",
       },
       {
         questionId: 3,
@@ -39,7 +37,6 @@ export const linux = [
           D: "Copies a file",
         },
         correctAnswer: "B",
-        chosenAnswer: "",
       },
       {
         questionId: 4,
@@ -51,7 +48,6 @@ export const linux = [
           D: "Deletes a directory",
         },
         correctAnswer: "C",
-        chosenAnswer: "",
       },
       {
         questionId: 5,
@@ -63,7 +59,6 @@ export const linux = [
           D: "Moves a file",
         },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 6,
@@ -75,7 +70,6 @@ export const linux = [
           D: "Renames a file",
         },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 7,
@@ -87,7 +81,6 @@ export const linux = [
           D: "Changes the current directory",
         },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 8,
@@ -99,7 +92,6 @@ export const linux = [
           D: "Deletes a file",
         },
         correctAnswer: "C",
-        chosenAnswer: "",
       },
       {
         questionId: 9,
@@ -111,7 +103,6 @@ export const linux = [
           D: "Deletes a file",
         },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 10,
@@ -123,7 +114,6 @@ export const linux = [
           D: "Creates a new file",
         },
         correctAnswer: "B",
-        chosenAnswer: "",
       },
     ],
   },

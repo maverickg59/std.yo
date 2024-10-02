@@ -10,14 +10,15 @@ import {
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import { FiChevronDown } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 type Props = {
   name: string;
-  quizzes: QuizData[];
+  content: { quiz_id: number; quiz_name: string }[];
   icon: IconType;
 };
 
-export const Collapse = ({ name, quizzes, icon }: Props) => {
+export const Collapse = ({ name, content, icon }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
@@ -35,11 +36,12 @@ export const Collapse = ({ name, quizzes, icon }: Props) => {
       </Button>
       <ChakraCollapse in={isOpen} animateOpacity>
         <Stack spacing="1" alignItems="stretch" ps="8" py="1">
-          {quizzes.map(({ quiz_name }) => (
-            <Button key={quiz_name} variant="tertiary" justifyContent="start">
-              {quiz_name}
-            </Button>
-          ))}
+          {content &&
+            content.map(({ quiz_name, quiz_id }) => (
+              <Link to={`quiz/${quiz_id}`} key={quiz_name}>
+                {quiz_name}
+              </Link>
+            ))}
         </Stack>
       </ChakraCollapse>
     </Box>

@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: "quiz/:id",
+        path: "quiz/:quiz_id",
         element: <Quiz />,
       },
     ],

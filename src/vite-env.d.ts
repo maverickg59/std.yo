@@ -10,7 +10,6 @@ type Question = {
     D: string;
   };
   correctAnswer: string;
-  chosenAnswer: string;
 };
 
 type QuizData = {
@@ -21,4 +20,10 @@ type QuizData = {
   questions: Question[];
 };
 
-type SetChosenAnswer = (questionId: number, chosenAnswer: string) => void;
+type Answer = {
+  [quizId: number]: {
+    [questionId: number]: string;
+  };
+};
+
+type Category = "linux" | "html" | "css" | "javascript";

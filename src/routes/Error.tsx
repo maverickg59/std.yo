@@ -1,5 +1,5 @@
 import { Container, Heading, Stack, Text } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Error() {
   return (
@@ -9,7 +9,7 @@ function Error() {
           Oops, an error occured.
         </Heading>
         <Text color="fg.muted">404: Page Not Found</Text>
-        <NavLink to="/">Return to Home</NavLink>
+        <Link to="/">Return to Home</Link>
       </Stack>
     </Container>
   );

@@ -1,46 +1,49 @@
 import { create } from "zustand";
-import { produce } from "immer";
 import { persist } from "zustand/middleware";
-import { linux, quizzes } from "../data";
+import { defaultQuiz } from "../data";
 
 type QuizState = {
-  quizData: QuizData;
-  quizzes: {
-    linux: QuizData[];
-    html: QuizData[];
-    css: QuizData[];
-    javascript: QuizData[];
-  };
+  quiz: QuizData;
+  page: number;
+  answers: Answer;
 };
 
 type QuizActions = {
-  setChosenAnswer: SetChosenAnswer;
-  resetQuizData: () => void;
+  setQuiz: (quiz: QuizData) => void;
+  setPage: (page: number) => void;
+  setAnswer: (quiz_id: number, question_id: number, answer: string) => void;
+  resetAnswers: (quiz_id: number) => void;
 };
-
-// programatically load quizzes into localstorage
-// programatically generate a set of url paths based on the quiz data
 
 export const useQuizStore = create<QuizState & QuizActions>()(
   persist(
     (set) => ({
-      quizData: linux[0],
-      quizzes,
-      setChosenAnswer: (questionId: number, chosenAnswer: string) =>
-        set(
-          produce((state: { quizData: QuizData }) => {
-            const question = state.quizData.questions.find(
-              (q) => q.questionId === questionId
-            );
-            if (question) {
-              question.chosenAnswer = chosenAnswer;
-            }
-          })
-        ),
-      resetQuizData: () => set({ quizData: linux[0] }),
+      answers: {},
+      quiz: defaultQuiz,
+      page: 1,
+      setPage: (page) => set((state) => ({ ...state, page })),
+      setQuiz: (quiz) => set((state) => ({ ...state, quiz })),
+      setAnswer: (quiz_id, question_id, answer) => {
+        set((state) => ({
+          ...state,
+          answers: {
+            ...state.answers,
+            [quiz_id]: { ...state.answers[quiz_id], [question_id]: answer },
+          },
+        }));
+      },
+      resetAnswers: (quiz_id) => {
+        const localStorageState = localStorage.getItem("std.y-answers");
+        if (localStorageState) {
+          const newState = JSON.parse(localStorageState).state.answers;
+          delete newState[quiz_id];
+          console.log(newState);
+          localStorage.setItem("std.y-answers", JSON.stringify(newState));
+        }
+      },
     }),
     {
-      name: "quiz-answers",
+      name: "std.y-answers",
     }
   )
 );

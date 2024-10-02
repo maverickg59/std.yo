@@ -1,7 +1,7 @@
-export const javascript = [
+export const javascript: QuizData[] = [
   {
     quiz_name: "JavaScript Arrays Quiz",
-    quiz_id: 2,
+    quiz_id: 10002,
     category_id: 2,
     category_name: "javascript",
     questions: [
@@ -15,7 +15,6 @@ export const javascript = [
           D: "Creates a new array",
         },
         correctAnswer: "B",
-        chosenAnswer: "",
       },
       {
         questionId: 2,
@@ -28,7 +27,6 @@ export const javascript = [
           D: "arr[0]",
         },
         correctAnswer: "D",
-        chosenAnswer: "",
       },
       {
         questionId: 3,
@@ -40,7 +38,6 @@ export const javascript = [
           D: "Creates a new array",
         },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 4,
@@ -48,7 +45,6 @@ export const javascript = [
           "How do you access the first element of an array called 'arr'?",
         choices: { A: "arr[0]", B: "arr.first()", C: "arr(0)", D: "arr{0}" },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 5,
@@ -60,7 +56,6 @@ export const javascript = [
           D: "Creates a new array",
         },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 6,
@@ -68,7 +63,6 @@ export const javascript = [
           "How do you access the first element of an array called 'arr'?",
         choices: { A: "arr[0]", B: "arr.first()", C: "arr(0)", D: "arr{0}" },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 7,
@@ -80,7 +74,6 @@ export const javascript = [
           D: "Creates a new array",
         },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 8,
@@ -88,7 +81,6 @@ export const javascript = [
           "How do you access the first element of an array called 'arr'?",
         choices: { A: "arr[0]", B: "arr.first()", C: "arr(0)", D: "arr{0}" },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 9,
@@ -100,7 +92,6 @@ export const javascript = [
           D: "Creates a new array",
         },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
       {
         questionId: 10,
@@ -108,7 +99,6 @@ export const javascript = [
           " How do you access the first element of an array called 'arr'?",
         choices: { A: "arr[0]", B: "arr.first()", C: "arr(0)", D: "arr{0}" },
         correctAnswer: "A",
-        chosenAnswer: "",
       },
     ],
   },
