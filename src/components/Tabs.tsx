@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import {
   Container,
   Stack,
@@ -7,17 +8,22 @@ import {
   Tabs as ChakraTabs,
   TabPanels,
 } from "@chakra-ui/react";
-import { ReactElement } from "react";
 
 type Props = {
   tabs: string[];
   children: ReactElement[];
+  defaultIndex?: number;
 };
 
-export const Tabs = ({ tabs, children }: Props) => (
+export const Tabs = ({ tabs, children, defaultIndex }: Props) => (
   <Container py={{ base: "1", md: "3" }}>
     <Stack spacing="8">
-      <ChakraTabs align="center" size={"md"} variant="indicator">
+      <ChakraTabs
+        defaultIndex={defaultIndex}
+        align="center"
+        size={"md"}
+        variant="indicator"
+      >
         <TabList>
           {tabs.map((tabName) => {
             return <Tab key={tabName}>{tabName}</Tab>;

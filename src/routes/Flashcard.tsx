@@ -45,18 +45,14 @@ const FlashcardList = () => {
             <Text textStyle="lg" fontWeight="medium">
               {flashcard_pack_name}
             </Text>
-            {flashcard_pack && (
-              <FlashcardPack flashcardPack={flashcard_pack} page={page} />
-            )}
-            {flashcard_pack && (
-              <Pagination
-                count={flashcard_pack.length}
-                pageSize={1}
-                siblingCount={1}
-                page={page}
-                onPageChange={(e) => setPage(e.page)}
-              />
-            )}
+            <FlashcardPack flashcardPack={flashcard_pack} page={page} />
+            <Pagination
+              count={flashcard_pack.length}
+              pageSize={1}
+              siblingCount={1}
+              page={page}
+              onPageChange={(e) => setPage(e.page)}
+            />
           </Stack>
         </Box>
       </Box>

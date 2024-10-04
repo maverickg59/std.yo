@@ -19,6 +19,7 @@ import { QuizPanel, FlashcardPanel } from "./Panels";
 import { Tabs } from "./Tabs";
 import { FiSun, FiMoon } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const ProfileStack = () => {
   return (
@@ -86,6 +87,9 @@ const MobileNavigation = () => {
 };
 
 export const SidebarNavigation = () => {
+  const { pathname } = useLocation();
+  const pathBase = pathname.split("/")[1];
+  const pathIndex = pathBase === "quiz" ? 0 : 1;
   return (
     <Stack
       maxW={{ base: "full", sm: "xs" }}
@@ -96,7 +100,7 @@ export const SidebarNavigation = () => {
       justifyContent="space-between"
     >
       <Stack spacing="2">
-        <Tabs tabs={["Quiz", "Flashcards"]}>
+        <Tabs defaultIndex={pathIndex} tabs={["Quiz", "Flashcards"]}>
           <QuizPanel />
           <FlashcardPanel />
         </Tabs>
