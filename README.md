@@ -60,8 +60,82 @@ export const defaultQuiz: QuizData = {
 - each correct and each plausible answer should be unique
 ```
 
+```json
+Generat a flashcard pack:
+
+1. Consider the following format:
+export const defaultFlashcard: FlashcardData = {
+  flashcard_pack_name: "You've found the default flashcard pack!",
+  flashcard_pack_id: 20001,
+  flashcard_category: "default",
+  flashcard_pack: [
+    { term: "JavaScript", definition: "A high-level programming language." },
+    {
+      term: "React",
+      definition: "A JavaScript library for building user interfaces.",
+    },
+    {
+      term: "Chakra UI",
+      definition: "A simple, modular, and accessible component library.",
+    },
+  ],
+};
+
+2. topics list:
+term: "Array.from()"
+term: "Array.fromAsync()"
+term: "Array.isArray()"
+term: "Array.of()"
+term: "Array.at()"
+term: "Array.concat()"
+term: "Array.copyWithin()"
+term: "Array.entries()"
+term: "Array.every()"
+term: "Array.fill()"
+term: "Array.filter()"
+term: "Array.find()"
+term: "Array.findIndex()"
+term: "Array.findLast()"
+term: "Array.findLastIndex()"
+term: "Array.flat()"
+term: "Array.flatMap()"
+term: "Array.forEach()"
+term: "Array.includes()"
+term: "Array.indexOf()"
+term: "Array.join()"
+term: "Array.keys()"
+term: "Array.lastIndexOf()"
+term: "Array.map()"
+term: "Array.pop()"
+term: "Array.push()"
+term: "Array.reduce()"
+term: "Array.reduceRight()"
+term: "Array.reverse()"
+term: "Array.shift()"
+term: "Array.slice()"
+term: "Array.some()"
+term: "Array.sort()"
+term: "Array.splice()"
+term: "Array.toLocaleString()"
+term: "Array.toReversed()"
+term: "Array.toSorted()"
+term: "Array.toSpliced()"
+term: "Array.toString()"
+term: "Array.unshift()"
+term: "Array.values()"
+term: "Array.with()"
+term: "Array.length()"
+
+3. generate a new flashcard_pack from the topics list where the term is the topic list item and the description consists of:
+- a concise explanation of what the method does
+- an example use case for the method
+```
+
 ## Road Map:
 
 1. add home button to mobile navigation
 2. update navigation implementation to prevent close of nav menu accordions
-3. add ChatGPT promptability
+3. programatically close nav menu on mobile
+4. beautify content layout for /, /quiz, /layout
+5. randomize initial display of term or description
+6. add ChatGPT promptability

@@ -1,6 +1,7 @@
 import { MdQuiz, MdOutlineContentPasteSearch } from "react-icons/md";
 import { IoFlashlightSharp } from "react-icons/io5";
 import { FaLinux, FaHtml5, FaCss3Alt, FaJsSquare } from "react-icons/fa";
+import { RiCriminalLine } from "react-icons/ri";
 
 export const navPaths = {
   quizzes: {
@@ -47,25 +48,25 @@ export const navPaths = {
   },
   flashcards: {
     linux: {
-      category_name: "Linux",
+      category_name: "JavaScript",
       category_icon: FaLinux,
       content: [
         {
           id: 20001,
-          name: "Linux",
+          name: "JavaScript Arrays",
         },
       ],
     },
-    // html: {
-    //   category_name: "HTML",
-    //   category_icon: FaHtml5,
-    //   content: [
-    //     {
-    //       id: 20002,
-    //       name: "",
-    //     },
-    //   ],
-    // },
+    threat: {
+      category_name: "Threat",
+      category_icon: RiCriminalLine,
+      content: [
+        {
+          id: 20002,
+          name: "Threat Groups",
+        },
+      ],
+    },
     // css: {
     //   category_name: "CSS",
     //   category_icon: FaCss3Alt,

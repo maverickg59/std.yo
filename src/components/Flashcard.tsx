@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 const Flashcard = ({ term, definition }: Flashcard) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -10,8 +10,8 @@ const Flashcard = ({ term, definition }: Flashcard) => {
 
   return (
     <Box
-      width="300px"
-      height="200px"
+      width={{ base: "80vw", md: "40vw" }}
+      height={{ base: "60vh", md: "35vh" }}
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
@@ -25,7 +25,9 @@ const Flashcard = ({ term, definition }: Flashcard) => {
       cursor="pointer"
       onClick={handleFlip}
     >
-      {isFlipped ? definition : term}
+      <Text textStyle="lg" fontWeight="medium">
+        {isFlipped ? definition : term}
+      </Text>
     </Box>
   );
 };

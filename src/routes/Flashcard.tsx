@@ -25,20 +25,12 @@ const FlashcardList = () => {
 
   return (
     <Container centerContent={true} maxW="100%">
-      <Box
-        minH="80%"
-        w="100%"
-        as="section"
-        bg="bg.surface"
-        pt={{ base: "4", md: "8" }}
-      >
+      <Box w="100%" as="section" bg="bg.surface" pt={{ base: "4", md: "8" }}>
         <Box
           bg="bg.surface"
           px={{ base: "4", md: "6" }}
-          py="5"
           boxShadow="sm"
           borderRadius="lg"
-          minH="100%"
           alignContent="center"
         >
           <Stack spacing={6} align="center" p={6}>
