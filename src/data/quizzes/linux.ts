@@ -2,6 +2,7 @@ export const linuxQuiz: QuizData[] = [
   {
     quiz_name: "Linux Commands",
     quiz_id: 10001,
+    quiz_category: "linux",
     questions: [
       {
         questionId: 1,

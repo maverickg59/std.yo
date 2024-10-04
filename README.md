@@ -59,3 +59,9 @@ export const defaultQuiz: QuizData = {
 - the correct answer should not contain language that is contained in the question unless necessary
 - each correct and each plausible answer should be unique
 ```
+
+## Road Map:
+
+1. add home button to mobile navigation
+2. update navigation implementation to prevent close of nav menu accordions
+3. add ChatGPT promptability

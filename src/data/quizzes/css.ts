@@ -2,6 +2,7 @@ export const cssQuiz: QuizData[] = [
   {
     quiz_name: "CSS Attributes",
     quiz_id: 10004,
+    quiz_category: "css",
     questions: [
       {
         questionId: 1,

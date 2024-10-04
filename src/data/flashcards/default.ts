@@ -1,6 +1,7 @@
 export const defaultFlashcard: FlashcardData = {
   flashcard_pack_name: "You've found the default flashcard pack!",
   flashcard_pack_id: 20001,
+  flashcard_category: "default",
   flashcard_pack: [
     { term: "JavaScript", definition: "A high-level programming language." },
     {

@@ -15,6 +15,7 @@ type Question = {
 type QuizData = {
   quiz_name: string;
   quiz_id: number;
+  quiz_category: string;
   questions: Question[];
 };
 
@@ -32,6 +33,7 @@ type Flashcard = {
 type FlashcardData = {
   flashcard_pack_name: string;
   flashcard_pack_id: number;
+  flashcard_category: string;
   flashcard_pack: Flashcard[];
 };
 

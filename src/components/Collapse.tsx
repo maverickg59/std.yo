@@ -21,6 +21,7 @@ type Props = {
 
 export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
+
   return (
     <Box>
       <Button

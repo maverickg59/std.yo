@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, SetStateAction, Dispatch } from "react";
 import {
   Container,
   Stack,
@@ -13,16 +13,26 @@ type Props = {
   tabs: string[];
   children: ReactElement[];
   defaultIndex?: number;
+  index?: number;
+  setIndex?: Dispatch<SetStateAction<number>>;
 };
 
-export const Tabs = ({ tabs, children, defaultIndex }: Props) => (
+export const Tabs = ({
+  tabs,
+  children,
+  defaultIndex,
+  index,
+  setIndex,
+}: Props) => (
   <Container py={{ base: "1", md: "3" }}>
     <Stack spacing="8">
       <ChakraTabs
         defaultIndex={defaultIndex}
+        index={index}
         align="center"
         size={"md"}
         variant="indicator"
+        onChange={setIndex ? (index) => setIndex(index) : () => {}}
       >
         <TabList>
           {tabs.map((tabName) => {

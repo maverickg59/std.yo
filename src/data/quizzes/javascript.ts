@@ -2,6 +2,7 @@ export const javascriptQuiz: QuizData[] = [
   {
     quiz_name: "JavaScript Array Methods",
     quiz_id: 10002,
+    quiz_category: "javascript",
     questions: [
       {
         questionId: 1,

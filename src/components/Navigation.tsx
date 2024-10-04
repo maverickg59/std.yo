@@ -20,6 +20,18 @@ import { Tabs } from "./Tabs";
 import { FiSun, FiMoon } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+const defaultIndex = (pathBase: string) => {
+  switch (pathBase) {
+    case "quiz":
+      return 0;
+    case "flashcards":
+      return 1;
+    default:
+      return 0;
+  }
+};
 
 const ProfileStack = () => {
   return (
@@ -47,6 +59,9 @@ const ProfileStack = () => {
 };
 
 const MobileDrawer = (props: Omit<DrawerProps, "children">) => {
+  const { pathname } = useLocation();
+  const pathBase = pathname.split("/")[1];
+  const [index, setIndex] = useState<number>(defaultIndex(pathBase));
   return (
     <Drawer placement="right" {...props}>
       <DrawerContent>
@@ -57,7 +72,12 @@ const MobileDrawer = (props: Omit<DrawerProps, "children">) => {
           mt="16"
         >
           <Stack spacing="6" align="stretch" flex="1">
-            <Tabs tabs={["Quiz", "Flashcards"]}>
+            <Tabs
+              defaultIndex={index}
+              index={index}
+              setIndex={setIndex}
+              tabs={["Quiz", "Flashcards"]}
+            >
               <QuizPanel />
               <FlashcardPanel />
             </Tabs>
@@ -89,7 +109,20 @@ const MobileNavigation = () => {
 export const SidebarNavigation = () => {
   const { pathname } = useLocation();
   const pathBase = pathname.split("/")[1];
-  const pathIndex = pathBase === "quiz" ? 0 : 1;
+  const [index, setIndex] = useState<number>(defaultIndex(pathBase));
+  useEffect(() => {
+    switch (pathBase) {
+      case "quiz":
+        setIndex(0);
+        break;
+      case "flashcards":
+        setIndex(1);
+        break;
+      default:
+        setIndex(0);
+        break;
+    }
+  }, [pathBase]);
   return (
     <Stack
       maxW={{ base: "full", sm: "xs" }}
@@ -100,7 +133,12 @@ export const SidebarNavigation = () => {
       justifyContent="space-between"
     >
       <Stack spacing="2">
-        <Tabs defaultIndex={pathIndex} tabs={["Quiz", "Flashcards"]}>
+        <Tabs
+          defaultIndex={index}
+          index={index}
+          setIndex={setIndex}
+          tabs={["Quiz", "Flashcards"]}
+        >
           <QuizPanel />
           <FlashcardPanel />
         </Tabs>
