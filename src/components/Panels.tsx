@@ -15,6 +15,7 @@ export const QuizPanel = () => {
                 key={category_name}
                 name={category_name}
                 content={content}
+                urlBasePath="quiz"
                 icon={category_icon}
               />
             );
@@ -36,6 +37,7 @@ export const FlashcardPanel = () => {
                 key={category_name}
                 name={category_name}
                 content={content}
+                urlBasePath="flashcards"
                 icon={category_icon}
               />
             );

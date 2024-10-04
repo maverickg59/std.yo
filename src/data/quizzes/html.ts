@@ -1,4 +1,4 @@
-export const html: QuizData[] = [
+export const htmlQuiz: QuizData[] = [
   {
     quiz_name: "HTML Tags",
     quiz_id: 10003,

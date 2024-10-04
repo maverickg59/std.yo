@@ -1,4 +1,4 @@
-export const linux: QuizData[] = [
+export const linuxQuiz: QuizData[] = [
   {
     quiz_name: "Linux Commands",
     quiz_id: 10001,

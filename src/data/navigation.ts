@@ -9,8 +9,8 @@ export const navPaths = {
       category_icon: FaLinux,
       content: [
         {
-          quiz_id: 10001,
-          quiz_name: "Linux Commands",
+          id: 10001,
+          name: "Linux Commands",
         },
       ],
     },
@@ -19,8 +19,8 @@ export const navPaths = {
       category_icon: FaHtml5,
       content: [
         {
-          quiz_id: 10003,
-          quiz_name: "HTML Tags",
+          id: 10003,
+          name: "HTML Tags",
         },
       ],
     },
@@ -29,8 +29,8 @@ export const navPaths = {
       category_icon: FaCss3Alt,
       content: [
         {
-          quiz_id: 10004,
-          quiz_name: "CSS Atributes",
+          id: 10004,
+          name: "CSS Atributes",
         },
       ],
     },
@@ -39,8 +39,8 @@ export const navPaths = {
       category_icon: FaJsSquare,
       content: [
         {
-          quiz_id: 10002,
-          quiz_name: "JavaScript Arrays",
+          id: 10002,
+          name: "JavaScript Arrays",
         },
       ],
     },
@@ -51,41 +51,41 @@ export const navPaths = {
       category_icon: FaLinux,
       content: [
         {
-          quiz_id: 20001,
-          quiz_name: "",
+          id: 20001,
+          name: "Linux",
         },
       ],
     },
-    html: {
-      category_name: "HTML",
-      category_icon: FaHtml5,
-      content: [
-        {
-          quiz_id: 20002,
-          quiz_name: "",
-        },
-      ],
-    },
-    css: {
-      category_name: "CSS",
-      category_icon: FaCss3Alt,
-      content: [
-        {
-          quiz_id: 20003,
-          quiz_name: "",
-        },
-      ],
-    },
-    javascript: {
-      category_name: "JavaScript",
-      category_icon: FaJsSquare,
-      content: [
-        {
-          quiz_id: 20004,
-          quiz_name: "",
-        },
-      ],
-    },
+    // html: {
+    //   category_name: "HTML",
+    //   category_icon: FaHtml5,
+    //   content: [
+    //     {
+    //       id: 20002,
+    //       name: "",
+    //     },
+    //   ],
+    // },
+    // css: {
+    //   category_name: "CSS",
+    //   category_icon: FaCss3Alt,
+    //   content: [
+    //     {
+    //       id: 20003,
+    //       name: "",
+    //     },
+    //   ],
+    // },
+    // javascript: {
+    //   category_name: "JavaScript",
+    //   category_icon: FaJsSquare,
+    //   content: [
+    //     {
+    //       id: 20004,
+    //       name: "",
+    //     },
+    //   ],
+    // },
   },
 };
 

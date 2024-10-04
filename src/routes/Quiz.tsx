@@ -10,13 +10,14 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { FaCheckCircle } from "react-icons/fa";
-import { RadioCard, RadioCardGroup, Pagination } from "../components";
+import { Pagination, RadioCardGroupQuestion } from "../components";
 import { useQuizStore } from "../stores";
 import { useParams } from "react-router-dom";
 import { quizzes } from "../data";
 
 function Quiz() {
   const [reveal, setReveal] = useState(false);
+  const { colorMode } = useColorMode();
   const toast = useToast();
   const { quiz_id } = useParams();
   const {
@@ -28,21 +29,20 @@ function Quiz() {
     setAnswer,
     resetAnswers,
   } = useQuizStore();
-  const { colorMode } = useColorMode();
-
-  const value =
-    (answers[Number(quiz_id)] && answers[Number(quiz_id)][page]) || undefined;
 
   useEffect(() => {
     const quiz = quizzes.find((quiz) => quiz.quiz_id === Number(quiz_id));
     if (quiz) {
       setQuiz(quiz);
     }
-  }, [quiz_id, setQuiz, setPage]);
+  }, [quiz_id, setQuiz]);
 
   useEffect(() => {
     setReveal(false);
   }, [page]);
+
+  const value =
+    (answers[Number(quiz_id)] && answers[Number(quiz_id)][page]) || undefined;
 
   const handleRadioSelection = (
     e: string,
@@ -74,59 +74,6 @@ function Quiz() {
     }
   };
 
-  type RCGQProps = {
-    page: number;
-    questions: Question[];
-    value: string | undefined;
-  };
-
-  const RadioCardGroupQuestion = ({ page, questions, value }: RCGQProps) => {
-    const questionComponents = questions.map(
-      ({ question, questionId, choices, correctAnswer }, i) => (
-        <>
-          <Stack>
-            <Text textStyle="md" fontWeight="medium">
-              Question {i + 1}:
-            </Text>
-            <Text textStyle="md" color="fg.muted">
-              {question}
-            </Text>
-          </Stack>
-          <RadioCardGroup
-            key={question}
-            value={value}
-            name={question}
-            spacing="8"
-            onChange={(e) =>
-              handleRadioSelection(
-                e,
-                Number(quiz_id),
-                questionId,
-                correctAnswer
-              )
-            }
-          >
-            {Object.entries(choices).map(([key, value]) => (
-              <RadioCard
-                key={value}
-                value={key}
-                isCorrect={key === correctAnswer}
-              >
-                <Text color="fg.emphasized" fontWeight="medium" fontSize="sm">
-                  Option {key}
-                </Text>
-                <Text color="fg.muted" textStyle="sm">
-                  {value}
-                </Text>
-              </RadioCard>
-            ))}
-          </RadioCardGroup>
-        </>
-      )
-    );
-    return questionComponents[page - 1];
-  };
-
   return (
     <Container centerContent={true} maxW="100%">
       <Box w="100%" as="section" bg="bg.surface" pt={{ base: "4", md: "8" }}>
@@ -145,6 +92,8 @@ function Quiz() {
               page={page}
               questions={questions}
               value={value}
+              quiz_id={quiz_id}
+              handleRadioSelection={handleRadioSelection}
             />
             <Pagination
               count={questions.length}

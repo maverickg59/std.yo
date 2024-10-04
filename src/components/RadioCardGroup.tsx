@@ -10,6 +10,8 @@ import {
   useRadio,
   useRadioGroup,
   UseRadioProps,
+  Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import {
   Children,
@@ -27,9 +29,7 @@ interface RadioCardGroupProps<T> extends Omit<StackProps, "onChange"> {
   onChange?: (value: T) => void;
 }
 
-export const RadioCardGroup = <T extends string>(
-  props: RadioCardGroupProps<T>
-) => {
+const RadioCardGroup = <T extends string>(props: RadioCardGroupProps<T>) => {
   const { children, name, defaultValue, value, onChange, ...rest } = props;
   const { getRootProps, getRadioProps } = useRadioGroup({
     name,
@@ -59,10 +59,11 @@ interface RadioCardProps extends BoxProps {
   value: string;
   radioProps?: UseRadioProps;
   isCorrect?: boolean;
+  colorMode?: string;
 }
 
-export const RadioCard = (props: RadioCardProps) => {
-  const { radioProps, children, isCorrect, ...rest } = props;
+const RadioCard = (props: RadioCardProps) => {
+  const { radioProps, children, isCorrect, colorMode, ...rest } = props;
   const { getInputProps, getRadioProps, getLabelProps, state } =
     useRadio(radioProps);
   const id = useId(undefined, "radio-button");
@@ -87,7 +88,9 @@ export const RadioCard = (props: RadioCardProps) => {
         {...checkboxProps}
         borderWidth="2px"
         _checked={
-          isCorrect ? { borderColor: "accent" } : { borderColor: "red.500" }
+          isCorrect
+            ? { borderColor: "accent" }
+            : { borderColor: colorMode === "dark" ? "red.300" : "red.500" }
         }
         borderRadius={10}
         _focus={{
@@ -99,7 +102,16 @@ export const RadioCard = (props: RadioCardProps) => {
         <Stack direction="row">
           <Box flex="1">{children}</Box>
           {state.isChecked ? (
-            <Circle bg={isCorrect ? "accent" : "tomato"} size="4">
+            <Circle
+              bg={
+                isCorrect
+                  ? "accent"
+                  : colorMode === "dark"
+                  ? "red.300"
+                  : "red.500"
+              }
+              size="4"
+            >
               <Icon
                 as={isCorrect ? CheckIcon : RxCross2}
                 boxSize={isCorrect ? "2.5" : "3.5"}
@@ -115,7 +127,7 @@ export const RadioCard = (props: RadioCardProps) => {
   );
 };
 
-export const CheckIcon = createIcon({
+const CheckIcon = createIcon({
   displayName: "CheckIcon",
   viewBox: "0 0 12 10",
   path: (
@@ -128,3 +140,66 @@ export const CheckIcon = createIcon({
     />
   ),
 });
+
+type RCGQProps = {
+  page: number;
+  questions: Question[];
+  value: string | undefined;
+  quiz_id: string | undefined;
+  handleRadioSelection: (
+    e: string,
+    quiz_id: number,
+    questionId: number,
+    correctAnswer: string
+  ) => void;
+};
+
+export const RadioCardGroupQuestion = ({
+  page,
+  questions,
+  value,
+  quiz_id = "10000",
+  handleRadioSelection,
+}: RCGQProps) => {
+  const { colorMode } = useColorMode();
+  const questionsArr = questions.map(
+    ({ question, questionId, choices, correctAnswer }, i) => (
+      <>
+        <Stack>
+          <Text textStyle="md" fontWeight="medium">
+            Question {i + 1}:
+          </Text>
+          <Text textStyle="md" color="fg.muted">
+            {question}
+          </Text>
+        </Stack>
+        <RadioCardGroup
+          key={question}
+          value={value}
+          name={question}
+          spacing="8"
+          onChange={(e) =>
+            handleRadioSelection(e, Number(quiz_id), questionId, correctAnswer)
+          }
+        >
+          {Object.entries(choices).map(([key, value]) => (
+            <RadioCard
+              colorMode={colorMode}
+              key={value}
+              value={key}
+              isCorrect={key === correctAnswer}
+            >
+              <Text color="fg.emphasized" fontWeight="medium" fontSize="sm">
+                Option {key}
+              </Text>
+              <Text color="fg.muted" textStyle="sm">
+                {value}
+              </Text>
+            </RadioCard>
+          ))}
+        </RadioCardGroup>
+      </>
+    )
+  );
+  return questionsArr[page - 1];
+};

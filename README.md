@@ -1,14 +1,17 @@
-1. create flashcards
+# Welcome to Std.y
 
-### Disclaimer: I've used ChatGPT to generate the content for these quizzes.
+Most commercially available study apps are weighty and flush with
+ads or premium content. This app cuts the crap and allows me to
+quickly generate and deploy quiz or flashcard content that is
+accessible anywhere I have an internet connection.
 
-## <strong>Here are some of my prompts:</strong>
+## Disclaimer: I use ChatGPT to generate the content for this app.
 
----
+<strong>Here are some of the prompts I used to generate the content:</strong>
 
+```json
 Generate individual quiz questions:
 
-```
 1. Randomly choose a key between A, B, C, and D to which you'll assign a correct answer.
 
 2. Consider the following format:
@@ -24,11 +27,9 @@ D: "Sets the font size",
 What does the 'font-size' property do?
 ```
 
----
+```json
+Generate a 10 question quiz:
 
-Generate a quiz:
-
-```
 1. Randomly choose a key between A, B, C, and D to which you'll assign a correct answer.
 
 2. Consider the following format:

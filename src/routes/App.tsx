@@ -5,6 +5,7 @@ import { Outlet, useLocation } from "react-router-dom";
 function App() {
   const isDesktop = useBreakpointValue({ base: false, lg: true });
   const location = useLocation();
+
   return (
     <Flex direction="column" minH="100vh">
       <HeaderNavigation />

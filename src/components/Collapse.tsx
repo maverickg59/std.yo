@@ -14,11 +14,12 @@ import { Link } from "react-router-dom";
 
 type Props = {
   name: string;
-  content: { quiz_id: number; quiz_name: string }[];
+  content: { id: number; name: string }[];
   icon: IconType;
+  urlBasePath: string;
 };
 
-export const Collapse = ({ name, content, icon }: Props) => {
+export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
@@ -38,14 +39,14 @@ export const Collapse = ({ name, content, icon }: Props) => {
         <Stack
           whiteSpace="nowrap"
           spacing="1"
-          alignItems="stretch"
+          alignItems="flex-start"
           ps="8"
           py="1"
         >
           {content &&
-            content.map(({ quiz_name, quiz_id }) => (
-              <Link to={`quiz/${quiz_id}`} key={quiz_name}>
-                {quiz_name}
+            content.map(({ name, id }) => (
+              <Link to={`${urlBasePath}/${id}`} key={name}>
+                {name}
               </Link>
             ))}
         </Stack>

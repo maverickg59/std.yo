@@ -1,4 +1,4 @@
-export const css: QuizData[] = [
+export const cssQuiz: QuizData[] = [
   {
     quiz_name: "CSS Attributes",
     quiz_id: 10004,

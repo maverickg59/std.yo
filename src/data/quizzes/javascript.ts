@@ -1,4 +1,4 @@
-export const javascript: QuizData[] = [
+export const javascriptQuiz: QuizData[] = [
   {
     quiz_name: "JavaScript Array Methods",
     quiz_id: 10002,

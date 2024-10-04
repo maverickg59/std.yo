@@ -24,4 +24,15 @@ type Answer = {
   };
 };
 
+type Flashcard = {
+  term: string;
+  definition: string;
+};
+
+type FlashcardData = {
+  flashcard_pack_name: string;
+  flashcard_pack_id: number;
+  flashcard_pack: Flashcard[];
+};
+
 type Category = "linux" | "html" | "css" | "javascript";
