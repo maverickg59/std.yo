@@ -9,7 +9,7 @@ accessible anywhere I have an internet connection.
 
 <strong>Here are some of the prompts I used to generate the content:</strong>
 
-```json
+```
 Generate individual quiz questions:
 
 1. Randomly choose a key between A, B, C, and D to which you'll assign a correct answer.
@@ -27,7 +27,7 @@ D: "Sets the font size",
 What does the 'font-size' property do?
 ```
 
-```json
+```
 Generate a 10 question quiz:
 
 1. Randomly choose a key between A, B, C, and D to which you'll assign a correct answer.
@@ -60,8 +60,8 @@ export const defaultQuiz: QuizData = {
 - each correct and each plausible answer should be unique
 ```
 
-```json
-Generat a flashcard pack:
+```
+Generate a flashcard pack:
 
 1. Consider the following format:
 export const defaultFlashcard: FlashcardData = {
