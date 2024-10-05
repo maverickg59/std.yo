@@ -10,24 +10,6 @@ accessible anywhere I have an internet connection.
 <strong>Here are some of the prompts I used to generate the content:</strong>
 
 ```
-Generate individual quiz questions:
-
-1. Randomly choose a key between A, B, C, and D to which you'll assign a correct answer.
-
-2. Consider the following format:
-choices: {
-A: "Sets a CSS property",
-B: "Sets the text color",
-C: "Sets the border color",
-D: "Sets the font size",
-}
-
-3. Give me one correct answer and three plausible, but incorrect answers to the following question:
-
-What does the 'font-size' property do?
-```
-
-```
 Generate a 10 question quiz:
 
 1. Randomly choose a key between A, B, C, and D to which you'll assign a correct answer.
@@ -82,49 +64,49 @@ export const defaultFlashcard: FlashcardData = {
 };
 
 2. topics list:
-term: "Array.from()"
-term: "Array.fromAsync()"
-term: "Array.isArray()"
-term: "Array.of()"
-term: "Array.at()"
-term: "Array.concat()"
-term: "Array.copyWithin()"
-term: "Array.entries()"
-term: "Array.every()"
-term: "Array.fill()"
-term: "Array.filter()"
-term: "Array.find()"
-term: "Array.findIndex()"
-term: "Array.findLast()"
-term: "Array.findLastIndex()"
-term: "Array.flat()"
-term: "Array.flatMap()"
-term: "Array.forEach()"
-term: "Array.includes()"
-term: "Array.indexOf()"
-term: "Array.join()"
-term: "Array.keys()"
-term: "Array.lastIndexOf()"
-term: "Array.map()"
-term: "Array.pop()"
-term: "Array.push()"
-term: "Array.reduce()"
-term: "Array.reduceRight()"
-term: "Array.reverse()"
-term: "Array.shift()"
-term: "Array.slice()"
-term: "Array.some()"
-term: "Array.sort()"
-term: "Array.splice()"
-term: "Array.toLocaleString()"
-term: "Array.toReversed()"
-term: "Array.toSorted()"
-term: "Array.toSpliced()"
-term: "Array.toString()"
-term: "Array.unshift()"
-term: "Array.values()"
-term: "Array.with()"
-term: "Array.length()"
+Array.from()
+Array.fromAsync()
+Array.isArray()
+Array.of()
+Array.at()
+Array.concat()
+Array.copyWithin()
+Array.entries()
+Array.every()
+Array.fill()
+Array.filter()
+Array.find()
+Array.findIndex()
+Array.findLast()
+Array.findLastIndex()
+Array.flat()
+Array.flatMap()
+Array.forEach()
+Array.includes()
+Array.indexOf()
+Array.join()
+Array.keys()
+Array.lastIndexOf()
+Array.map()
+Array.pop()
+Array.push()
+Array.reduce()
+Array.reduceRight()
+Array.reverse()
+Array.shift()
+Array.slice()
+Array.some()
+Array.sort()
+Array.splice()
+Array.toLocaleString()
+Array.toReversed()
+Array.toSorted()
+Array.toSpliced()
+Array.toString()
+Array.unshift()
+Array.values()
+Array.with()
+Array.length()
 
 3. generate a new flashcard_pack from the topics list where the term is the topic list item and the description consists of:
 - a concise explanation of what the method does
