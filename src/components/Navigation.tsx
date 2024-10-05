@@ -19,8 +19,8 @@ import { QuizPanel, FlashcardPanel } from "./Panels";
 import { Tabs } from "./Tabs";
 import { FiSun, FiMoon } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { usePathBase } from "../hooks";
 
 const defaultIndex = (pathBase: string) => {
   switch (pathBase) {
@@ -59,8 +59,7 @@ const ProfileStack = () => {
 };
 
 const MobileDrawer = (props: Omit<DrawerProps, "children">) => {
-  const { pathname } = useLocation();
-  const pathBase = pathname.split("/")[1];
+  const pathBase = usePathBase();
   const [index, setIndex] = useState<number>(defaultIndex(pathBase));
   return (
     <Drawer placement="right" {...props}>
@@ -107,8 +106,7 @@ const MobileNavigation = () => {
 };
 
 export const SidebarNavigation = () => {
-  const { pathname } = useLocation();
-  const pathBase = pathname.split("/")[1];
+  const pathBase = usePathBase();
   const [index, setIndex] = useState<number>(defaultIndex(pathBase));
   useEffect(() => {
     switch (pathBase) {
