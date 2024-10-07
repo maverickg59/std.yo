@@ -1,7 +1,7 @@
 import { Container, Heading, Stack, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-function Error() {
+function ErrorRoute() {
   return (
     <Container maxW="md" py={{ base: "12", md: "24" }}>
       <Stack spacing={8} textAlign="center">
@@ -15,4 +15,4 @@ function Error() {
   );
 }
 
-export default Error;
+export default ErrorRoute;

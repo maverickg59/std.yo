@@ -3,13 +3,13 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { chakraProTheme } from "./theme.ts";
-import { Root, Quiz, Error, FlashcardList } from "./routes";
+import { Root, Quiz, ErrorRoute, FlashcardList } from "./routes";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <Error />,
+    errorElement: <ErrorRoute />,
     children: [
       {
         path: "quiz/:quiz_id",

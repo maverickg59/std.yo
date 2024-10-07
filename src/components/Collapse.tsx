@@ -26,8 +26,6 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
   const { setPage: setQuizPage } = useQuizStore();
   const { setPage: setFlashcardPage } = useFlashcardStore();
   const pathBase = usePathBase();
-  console.log(pathBase);
-
   return (
     <Box>
       <Button
@@ -50,18 +48,19 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
           ps="8"
           py="1"
         >
-          {content &&
-            content.map(({ name, id }) => (
-              <Link
-                onClick={() =>
-                  pathBase === "quiz" ? setQuizPage(1) : setFlashcardPage(1)
-                }
-                to={`${urlBasePath}/${id}`}
-                key={name}
-              >
-                {name}
-              </Link>
-            ))}
+          {content
+            ? content.map(({ name, id }) => (
+                <Link
+                  onClick={() =>
+                    pathBase === "quiz" ? setQuizPage(1) : setFlashcardPage(1)
+                  }
+                  to={`${urlBasePath}/${id}`}
+                  key={name}
+                >
+                  {name}
+                </Link>
+              ))
+            : null}
         </Stack>
       </ChakraCollapse>
     </Box>

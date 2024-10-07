@@ -116,8 +116,14 @@ Array.length()
 ## Road Map:
 
 1. add home button to mobile navigation
-2. update navigation implementation to prevent close of nav menu accordions
-3. programatically close nav menu on mobile
+2. on desktop and mobile keep open nav accordions on navigate
+3. on mobile close nav menu on navigate
 4. beautify content layout for /, /quiz, /layout
 5. randomize initial display of term or description
-6. add ChatGPT promptability
+6. combine zustand stores into slices
+7. store quiz and flashcard data in dynamo
+8. request dynamo data via lambda
+9. allow user to upload pdf
+10. integrate authentication and authorization flow
+11. call OpenAI to create quiz from pdf content (auth users only)
+12. add ChatGPT promptability (auth users only)
