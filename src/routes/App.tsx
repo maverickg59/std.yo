@@ -26,13 +26,13 @@ function App() {
     memoizedOptions
   );
 
-  console.log(kvData, error, loading);
-
   useEffect(() => {
     if (data) {
       setKvData(data);
     }
   }, [data]);
+
+  console.log(kvData, error, loading);
 
   return (
     <Flex direction="column" minH="100vh">
