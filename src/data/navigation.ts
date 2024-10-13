@@ -67,26 +67,6 @@ export const navPaths = {
         },
       ],
     },
-    // css: {
-    //   category_name: "CSS",
-    //   category_icon: FaCss3Alt,
-    //   content: [
-    //     {
-    //       id: 20003,
-    //       name: "",
-    //     },
-    //   ],
-    // },
-    // javascript: {
-    //   category_name: "JavaScript",
-    //   category_icon: FaJsSquare,
-    //   content: [
-    //     {
-    //       id: 20004,
-    //       name: "",
-    //     },
-    //   ],
-    // },
   },
 };
 

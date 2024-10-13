@@ -24,7 +24,7 @@ export const Features = () => (
               fontWeight="semibold"
               color="accent"
             >
-              Welcome to Std.y
+              Welcome to Std.yo
             </Text>
             <Heading size={{ base: "sm", md: "md" }}>
               This app uses ChatGPT generated content to assist with learning

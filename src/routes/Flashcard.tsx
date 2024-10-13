@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FlashcardPack, Pagination } from "../components";
 import { flashcards } from "../data";
-import { useFlashcardStore } from "../stores";
+import { useStore } from "../stores";
 
 const FlashcardList = () => {
   const { flashcard_id } = useParams();
@@ -12,7 +12,7 @@ const FlashcardList = () => {
     page,
     setPage,
     setFlashcards,
-  } = useFlashcardStore();
+  } = useStore();
 
   useEffect(() => {
     const flashcard = flashcards.find(

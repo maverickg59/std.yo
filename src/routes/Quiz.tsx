@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { FaCheckCircle } from "react-icons/fa";
 import { Pagination, RadioCardGroupQuestion } from "../components";
-import { useQuizStore } from "../stores";
+import { useStore } from "../stores";
 import { useParams } from "react-router-dom";
 import { quizzes } from "../data";
 
@@ -28,7 +28,7 @@ function Quiz() {
     answers,
     setAnswer,
     resetAnswers,
-  } = useQuizStore();
+  } = useStore();
 
   useEffect(() => {
     const quiz = quizzes.find((quiz) => quiz.quiz_id === Number(quiz_id));

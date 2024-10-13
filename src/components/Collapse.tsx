@@ -11,7 +11,7 @@ import {
 import { IconType } from "react-icons";
 import { FiChevronDown } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useQuizStore, useFlashcardStore } from "../stores";
+import { useStore } from "../stores";
 import { usePathBase } from "../hooks";
 
 type Props = {
@@ -23,8 +23,7 @@ type Props = {
 
 export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
-  const { setPage: setQuizPage } = useQuizStore();
-  const { setPage: setFlashcardPage } = useFlashcardStore();
+  const { setPage: setQuizPage, setPage: setFlashcardPage } = useStore();
   const pathBase = usePathBase();
   return (
     <Box>

@@ -1,2 +1,1 @@
-export { useQuizStore } from "./quiz";
-export { useFlashcardStore } from "./flashcard";
+export { useStore } from "./store";

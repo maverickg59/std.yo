@@ -1,4 +1,4 @@
-# Welcome to Std.y
+# Welcome to Std.yo
 
 Most commercially available study apps are weighty and flush with
 ads or premium content. This app cuts the crap and allows me to
@@ -120,10 +120,13 @@ Array.length()
 3. on mobile close nav menu on navigate
 4. beautify content layout for /, /quiz, /layout
 5. randomize initial display of term or description
-6. combine zustand stores into slices
-7. store quiz and flashcard data in dynamo
-8. request dynamo data via lambda
-9. allow user to upload pdf
-10. integrate authentication and authorization flow
-11. call OpenAI to create quiz from pdf content (auth users only)
-12. add ChatGPT promptability (auth users only)
+6. allow user to upload pdf
+7. integrate authentication and authorization flow
+8. call OpenAI to create quiz from pdf content (auth users only)
+9. add ChatGPT promptability (auth users only)
+
+### active today:
+
+10. store quizzes in supabase
+11. store flashcards in supabase
+12. store nav links in supabase

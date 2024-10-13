@@ -29,7 +29,9 @@ interface RadioCardGroupProps<T> extends Omit<StackProps, "onChange"> {
   onChange?: (value: T) => void;
 }
 
-const RadioCardGroup = <T extends string>(props: RadioCardGroupProps<T>) => {
+export const RadioCardGroup = <T extends string>(
+  props: RadioCardGroupProps<T>
+) => {
   const { children, name, defaultValue, value, onChange, ...rest } = props;
   const { getRootProps, getRadioProps } = useRadioGroup({
     name,
@@ -62,7 +64,7 @@ interface RadioCardProps extends BoxProps {
   colorMode?: string;
 }
 
-const RadioCard = (props: RadioCardProps) => {
+export const RadioCard = (props: RadioCardProps) => {
   const { radioProps, children, isCorrect, colorMode, ...rest } = props;
   const { getInputProps, getRadioProps, getLabelProps, state } =
     useRadio(radioProps);
@@ -93,9 +95,6 @@ const RadioCard = (props: RadioCardProps) => {
             : { borderColor: colorMode === "dark" ? "red.300" : "red.500" }
         }
         borderRadius={10}
-        _focus={{
-          boxShadow: "outline",
-        }}
         p={3}
         {...rest}
       >
