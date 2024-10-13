@@ -125,8 +125,8 @@ Array.length()
 8. call OpenAI to create quiz from pdf content (auth users only)
 9. add ChatGPT promptability (auth users only)
 
-### active today:
-
-10. store quizzes in supabase
-11. store flashcards in supabase
-12. store nav links in supabase
+### Supabase integration:
+1. auth flow
+2. store quizzes in supabase via RPC function
+3. store flashcards in supabase via RPC function
+4. store nav links in supabase via RPC function
