@@ -130,3 +130,13 @@ Array.length()
 2. store quizzes in supabase via RPC function
 3. store flashcards in supabase via RPC function
 4. store nav links in supabase via RPC function
+
+### Quiz Topics:
+- 
+### Flashcard Topics:
+- linux filesystem
+- linux file permissions
+- linux commands
+	- 100 of them
+- linux distros
+- absolute vs relative path

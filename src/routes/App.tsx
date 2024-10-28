@@ -9,7 +9,9 @@ function App() {
   const location = useLocation();
 
   async function fetchData() {
-    const { data: quizData } = await supabase.from("quizzes").select();
+    const { data: quizData } = await supabase
+      .from("quiz")
+      .select(`*, quiz_question (*, quiz_question_choice (*))`);
     if (quizData) {
       console.log("quiz data: ", quizData);
     }

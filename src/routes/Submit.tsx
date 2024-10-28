@@ -15,33 +15,35 @@ const Submit = () => {
   const [value, setValue] = useState("1");
   const [text, setText] = useState("");
 
-  const quiz_name = "You've found the default quiz!";
-  const quiz_category = "default";
-  const quiz_questions = [
+  const quiz = {
+    quiz_name: "Default quiz 3",
+    quiz_category: "default",
+  };
+  const quiz_question = [
     {
       quiz_question: "What should you do if the default quiz is loaded?",
-      quiz_question_choice: [
-        {
-          choice_letter: "A",
-          choice_text: "Return to the homepage",
-          is_correct: true,
-        },
-        {
-          choice_letter: "B",
-          choice_text: "Yell at the monitor",
-          is_correct: false,
-        },
-        {
-          choice_letter: "C",
-          choice_text: "Be mad at Chris White",
-          is_correct: false,
-        },
-        {
-          choice_letter: "D",
-          choice_text: "Save the turtles",
-          is_correct: false,
-        },
-      ],
+    },
+  ];
+  const quiz_question_choice = [
+    {
+      choice_letter: "A",
+      choice_text: "Return to the homepage",
+      is_correct: true,
+    },
+    {
+      choice_letter: "B",
+      choice_text: "Yell at the monitor",
+      is_correct: false,
+    },
+    {
+      choice_letter: "C",
+      choice_text: "Be mad at Chris White",
+      is_correct: false,
+    },
+    {
+      choice_letter: "D",
+      choice_text: "Save the turtles",
+      is_correct: false,
     },
   ];
 
@@ -53,27 +55,31 @@ const Submit = () => {
 
   type QuizQuestion = {
     quiz_question: string;
-    quiz_question_choice: QuizChoice[];
+  };
+
+  type Quiz = {
+    quiz_name: string;
+    quiz_category: string;
   };
 
   const submitQuiz = async (
-    quiz_name: string,
-    quiz_category: string,
-    quiz_questions: QuizQuestion[]
+    quiz: Quiz,
+    quiz_question: QuizQuestion[],
+    quiz_question_choice: QuizChoice[]
   ) => {
-    const { data, error } = await supabase.rpc("insert_quiz_with_questions", {
-      quiz_name,
-      quiz_category,
-      quiz_questions: JSON.stringify(quiz_questions),
+    const { data, error } = await supabase.rpc("insert_quiz", {
+      quiz,
+      quiz_question,
+      quiz_question_choice,
     });
     return { data, error };
   };
 
   const handleSubmit = async () => {
     const { data, error } = await submitQuiz(
-      quiz_name,
-      quiz_category,
-      quiz_questions
+      quiz,
+      quiz_question,
+      quiz_question_choice
     );
     if (error) {
       console.error("Error submitting quiz:", error);
