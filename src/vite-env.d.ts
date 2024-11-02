@@ -1,5 +1,29 @@
 /// <reference types="vite/client" />
 
+// latest version of quiz types
+type NewQuizSubmission = {
+  quiz_name: string;
+  quiz_category: string;
+  quiz_question: QuizQuestion[];
+};
+
+type Quiz = {
+  quiz_name: string;
+  quiz_category: string;
+};
+
+type QuizQuestion = {
+  quiz_question: string;
+  quiz_question_choice: QuizQuestionChoice[];
+};
+
+type QuizQuestionChoice = {
+  choice_letter: string;
+  choice_text: string;
+  is_correct: boolean;
+};
+
+// older version of quiz types
 type Question = {
   questionId: number;
   question: string;

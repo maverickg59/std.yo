@@ -126,7 +126,6 @@ Array.length()
 9. add ChatGPT promptability (auth users only)
 
 ### Supabase integration:
-1. auth flow
 2. store quizzes in supabase via RPC function
 3. store flashcards in supabase via RPC function
 4. store nav links in supabase via RPC function

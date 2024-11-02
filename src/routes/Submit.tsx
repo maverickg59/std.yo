@@ -7,80 +7,48 @@ import {
   RadioGroup,
   Stack,
   Radio,
+  Text,
 } from "@chakra-ui/react";
+import { object, string, boolean, array, assert } from "superstruct";
 import { useState } from "react";
+import { useStore } from "../stores";
 import { supabase } from "../utils";
 
+const NewQuizSubmissionSchema = object({
+  quiz_name: string(),
+  quiz_category: string(),
+  quiz_question: array(
+    object({
+      quiz_question: string(),
+      quiz_question_choice: array(
+        object({
+          choice_letter: string(),
+          choice_text: string(),
+          is_correct: boolean(),
+        })
+      ),
+    })
+  ),
+});
+
 const Submit = () => {
-  const [value, setValue] = useState("1");
-  const [text, setText] = useState("");
+  const [uploadType, setUploadType] = useState("quiz");
+  const {
+    new_quiz_submission: { quiz_string, quiz_error, json_quiz },
+    setQuizString,
+    setQuizError,
+    setNewQuizSubmission,
+  } = useStore();
 
-  const quiz = {
-    quiz_name: "Default quiz 3",
-    quiz_category: "default",
-  };
-  const quiz_question = [
-    {
-      quiz_question: "What should you do if the default quiz is loaded?",
-    },
-  ];
-  const quiz_question_choice = [
-    {
-      choice_letter: "A",
-      choice_text: "Return to the homepage",
-      is_correct: true,
-    },
-    {
-      choice_letter: "B",
-      choice_text: "Yell at the monitor",
-      is_correct: false,
-    },
-    {
-      choice_letter: "C",
-      choice_text: "Be mad at Chris White",
-      is_correct: false,
-    },
-    {
-      choice_letter: "D",
-      choice_text: "Save the turtles",
-      is_correct: false,
-    },
-  ];
-
-  type QuizChoice = {
-    choice_letter: string;
-    choice_text: string;
-    is_correct: boolean;
-  };
-
-  type QuizQuestion = {
-    quiz_question: string;
-  };
-
-  type Quiz = {
-    quiz_name: string;
-    quiz_category: string;
-  };
-
-  const submitQuiz = async (
-    quiz: Quiz,
-    quiz_question: QuizQuestion[],
-    quiz_question_choice: QuizChoice[]
-  ) => {
+  const submitQuiz = async (quiz: NewQuizSubmission) => {
     const { data, error } = await supabase.rpc("insert_quiz", {
       quiz,
-      quiz_question,
-      quiz_question_choice,
     });
     return { data, error };
   };
 
   const handleSubmit = async () => {
-    const { data, error } = await submitQuiz(
-      quiz,
-      quiz_question,
-      quiz_question_choice
-    );
+    const { data, error } = await submitQuiz(json_quiz as NewQuizSubmission);
     if (error) {
       console.error("Error submitting quiz:", error);
     } else {
@@ -88,24 +56,61 @@ const Submit = () => {
     }
   };
 
+  const isValid = (value: string) => {
+    const parsed = JSON.parse(value);
+    assert(parsed, NewQuizSubmissionSchema);
+    if (parsed === null || typeof parsed !== "object") {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const text = e.target.value;
+    if (text.length === 0) {
+      setNewQuizSubmission({} as NewQuizSubmission);
+    }
+    setQuizString(text);
+    setQuizError("");
+    try {
+      if (isValid(text)) {
+        setNewQuizSubmission(JSON.parse(text));
+      }
+    } catch (e: unknown) {
+      if (e instanceof Error && text.length > 0) {
+        setQuizError(e.message);
+      }
+    }
+  };
+
   return (
     <Container maxW="100%" display="flex" justifyContent="center" mt="20">
-      <Box w="90%">
+      <Box w="80%">
         <VStack spacing={6} align="left">
-          <RadioGroup p={4} onChange={setValue} value={value}>
+          <RadioGroup
+            p={4}
+            onChange={(e) => {
+              setUploadType(e);
+            }}
+            value={uploadType}
+          >
             <Stack spacing={10} direction="row">
-              <Radio value="1">Quiz</Radio>
-              <Radio value="2">Flashcard</Radio>
+              <Radio value="quiz">Quiz</Radio>
+              <Radio value="flashcard">Flashcard</Radio>
             </Stack>
           </RadioGroup>
           <Textarea
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Place your data object here"
+            value={quiz_string}
+            onChange={(e) => handleTextAreaChange(e)}
+            placeholder="Place your quiz object here"
             size="md"
-            height="60vh"
+            height="50vh"
             resize="both"
           />
+          <Text color="red.500" height="20px">
+            {quiz_error}
+          </Text>
           <Button onClick={handleSubmit} colorScheme="blue">
             Submit
           </Button>

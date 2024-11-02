@@ -41,8 +41,7 @@ function Quiz() {
     setReveal(false);
   }, [page]);
 
-  const value =
-    (answers[Number(quiz_id)] && answers[Number(quiz_id)][page]) || undefined;
+  const value = answers[Number(quiz_id)]?.[page] || undefined;
 
   const handleRadioSelection = (
     e: string,
@@ -91,7 +90,7 @@ function Quiz() {
             <RadioCardGroupQuestion
               page={page}
               questions={questions}
-              value={value}
+              value={value as string}
               quiz_id={quiz_id}
               handleRadioSelection={handleRadioSelection}
             />
@@ -100,7 +99,7 @@ function Quiz() {
               pageSize={1}
               siblingCount={1}
               page={page}
-              onPageChange={(e) => setPage(e.page)}
+              onPageChange={(e: { page: number }) => setPage(e.page)}
             />
           </Stack>
         </Box>

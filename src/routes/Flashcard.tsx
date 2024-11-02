@@ -43,7 +43,7 @@ const FlashcardList = () => {
               pageSize={1}
               siblingCount={1}
               page={page}
-              onPageChange={(e) => setPage(e.page)}
+              onPageChange={(e: { page: number }) => setPage(e.page)}
             />
           </Stack>
         </Box>
