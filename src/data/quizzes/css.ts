@@ -1,4 +1,4 @@
-export const cssQuiz: QuizData = {
+export const cssQuiz = {
   quiz_name: "CSS Attributes",
   quiz_id: 10004,
   quiz_category: "css",

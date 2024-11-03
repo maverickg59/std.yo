@@ -1,4 +1,4 @@
-export const javascriptQuiz: QuizData = {
+export const javascriptQuiz = {
   quiz_name: "JavaScript Array Methods",
   quiz_id: 10002,
   quiz_category: "javascript",

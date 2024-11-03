@@ -1,4 +1,4 @@
-export const linuxQuiz: QuizData = {
+export const linuxQuiz = {
   quiz_name: "Linux Commands",
   quiz_id: 10001,
   quiz_category: "linux",

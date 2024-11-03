@@ -1,4 +1,4 @@
-export const htmlQuiz: QuizData = {
+export const htmlQuiz = {
   quiz_name: "HTML Tags",
   quiz_id: 10003,
   quiz_category: "html",
