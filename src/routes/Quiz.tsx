@@ -89,54 +89,56 @@ function Quiz() {
 
   return (
     <Container centerContent={true} maxW="100%">
-      <Box w="100%" as="section" bg="bg.surface" pt={{ base: "4", md: "8" }}>
-        <Box
-          bg="bg.surface"
-          px={{ base: "4", md: "6" }}
-          py="5"
-          boxShadow="sm"
-          borderRadius="lg"
-        >
-          <Stack spacing="6">
-            <Text textStyle="lg" fontWeight="medium">
-              {quiz_name}
+      {quiz_name && (
+        <Box w="100%" as="section" bg="bg.surface" pt={{ base: "4", md: "8" }}>
+          <Box
+            bg="bg.surface"
+            px={{ base: "4", md: "6" }}
+            py="5"
+            boxShadow="sm"
+            borderRadius="lg"
+          >
+            <Stack spacing="6">
+              <Text textStyle="lg" fontWeight="medium">
+                {quiz_name}
+              </Text>
+              <RadioCardGroupQuestion
+                page={page}
+                quiz_id={quiz_id}
+                questions={quiz_question}
+                value={value as string}
+                correctAnswer={correctAnswer as string}
+                handleRadioSelection={handleRadioSelection}
+              />
+              <Pagination
+                count={quiz_question ? quiz_question.length : 0}
+                pageSize={1}
+                siblingCount={1}
+                page={page}
+                onPageChange={(e: { page: number }) => setPage(e.page)}
+              />
+            </Stack>
+          </Box>
+          <Flex justifyContent="center" pt={4}>
+            <Text visibility={reveal ? "visible" : "hidden"}>
+              Correct Answer: {correctAnswer}
             </Text>
-            <RadioCardGroupQuestion
-              page={page}
-              quiz_id={quiz_id}
-              questions={quiz_question}
-              value={value as string}
-              correctAnswer={correctAnswer as string}
-              handleRadioSelection={handleRadioSelection}
-            />
-            <Pagination
-              count={quiz_question ? quiz_question.length : 0}
-              pageSize={1}
-              siblingCount={1}
-              page={page}
-              onPageChange={(e: { page: number }) => setPage(e.page)}
-            />
-          </Stack>
+          </Flex>
+          <Flex
+            justifyContent="space-between"
+            px={8}
+            pt={{ base: "4", md: "0" }}
+            pb={8}
+          >
+            <Button variant="text" onClick={() => setReveal(!reveal)}>
+              Reveal Answer
+            </Button>
+            <Button variant="text" onClick={() => resetAnswers(quiz_id)}>
+              Reset Answers
+            </Button>
+          </Flex>
         </Box>
-        <Flex justifyContent="center" pt={4}>
-          <Text visibility={reveal ? "visible" : "hidden"}>
-            Correct Answer: {correctAnswer}
-          </Text>
-        </Flex>
-        <Flex
-          justifyContent="space-between"
-          px={8}
-          pt={{ base: "4", md: "0" }}
-          pb={8}
-        >
-          <Button variant="text" onClick={() => setReveal(!reveal)}>
-            Reveal Answer
-          </Button>
-          <Button variant="text" onClick={() => resetAnswers(quiz_id)}>
-            Reset Answers
-          </Button>
-        </Flex>
-      </Box>
+      )}
     </Container>
   );
 }
