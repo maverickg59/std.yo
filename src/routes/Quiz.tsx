@@ -25,7 +25,7 @@ function Quiz() {
   const { quiz_id: quiz_id_param } = useParams();
 
   const {
-    quiz: { quiz_name, quiz_id, quiz_question },
+    quiz,
     quizzes,
     page,
     setQuiz,
@@ -35,6 +35,8 @@ function Quiz() {
     resetAnswers,
   } = useStore();
 
+  const { quiz_id, quiz_name, quiz_question } = quiz || {};
+
   useEffect(() => {
     const quiz = quizzes.find((quiz) => quiz.quiz_id === Number(quiz_id_param));
     if (quiz) {
@@ -43,20 +45,26 @@ function Quiz() {
   }, [quizzes, quiz_id_param, setQuiz]);
 
   useEffect(() => {
-    setReveal(false);
+    if (!quiz_question || !answers || page <= 0) return;
 
-    const currentQuestionId = quiz_question[page - 1]?.quiz_question_id;
+    const currentQuestion = quiz_question[page - 1];
+    const currentQuestionId = currentQuestion?.quiz_question_id;
+
     if (currentQuestionId !== undefined) {
       setValue(answers[quiz_id]?.[currentQuestionId] || undefined);
-      quiz_question
-        .find((question) => question.quiz_question_id === currentQuestionId)
-        ?.quiz_question_choice.forEach(({ choice_letter, is_correct }) => {
-          if (is_correct) {
-            setCorrectAnswer(choice_letter);
-          }
-        });
+
+      const correctChoice = currentQuestion.quiz_question_choice.find(
+        (choice) => choice.is_correct
+      );
+      if (correctChoice) {
+        setCorrectAnswer(correctChoice.choice_letter);
+      }
     }
   }, [page, quiz_id, quiz_question, answers]);
+
+  useEffect(() => {
+    setReveal(false);
+  }, []);
 
   const handleRadioSelection = (
     e: string,
@@ -89,7 +97,7 @@ function Quiz() {
 
   return (
     <Container centerContent={true} maxW="100%">
-      {quiz_name && (
+      {quiz_name && quiz_question && (
         <Box w="100%" as="section" bg="bg.surface" pt={{ base: "4", md: "8" }}>
           <Box
             bg="bg.surface"
@@ -106,8 +114,8 @@ function Quiz() {
                 page={page}
                 quiz_id={quiz_id}
                 questions={quiz_question}
-                value={value as string}
-                correctAnswer={correctAnswer as string}
+                value={(value as string) || ""}
+                correctAnswer={(correctAnswer as string) || ""}
                 handleRadioSelection={handleRadioSelection}
               />
               <Pagination
