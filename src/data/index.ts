@@ -1,7 +1,7 @@
 import { linuxQuiz } from "./quizzes/linux";
 import { htmlQuiz } from "./quizzes/html";
 import { cssQuiz } from "./quizzes/css";
-export { defaultQuiz } from "./quizzes/default";
+export { defaultQuiz, newDefault } from "./quizzes/default";
 
 import { javascriptQuiz } from "./quizzes/javascript";
 import { javascriptFlashcard } from "./flashcards/javascript";

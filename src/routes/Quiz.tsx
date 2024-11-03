@@ -22,8 +22,10 @@ function Quiz() {
   const { quiz_id } = useParams();
   const {
     quiz: { quiz_name, questions },
+    quizzes: newQuizzes,
     page,
     setQuiz,
+    setNewQuiz,
     setPage,
     answers,
     setAnswer,
@@ -32,8 +34,12 @@ function Quiz() {
 
   useEffect(() => {
     const quiz = quizzes.find((quiz) => quiz.quiz_id === Number(quiz_id));
+    const newQuiz = newQuizzes.find((quiz) => quiz.quiz_id === Number(quiz_id));
     if (quiz) {
       setQuiz(quiz);
+    }
+    if (newQuiz) {
+      setNewQuiz(newQuiz);
     }
   }, [quiz_id, setQuiz]);
 

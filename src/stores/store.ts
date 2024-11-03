@@ -1,12 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { createFlashcardSlice } from "./flashcard_slice";
-import { createQuizSlice } from "./quiz_slice";
+import { createFlashcardSlice, Flashcard } from "./flashcard_slice";
+import { createQuizSlice, Quizzes } from "./quiz_slice";
+import { createSubmissionSlice, Submission } from "./submission_slice";
 
-import { Flashcard } from "./flashcard_slice";
-import { Quiz } from "./quiz_slice";
-
-export const useStore = create<Flashcard & Quiz>((...args) => ({
+export const useStore = create<Flashcard & Quizzes & Submission>((...args) => ({
   ...createFlashcardSlice(...args),
   ...persist(createQuizSlice, { name: "std.yo-answers" })(...args),
+  ...createSubmissionSlice(...args),
 }));

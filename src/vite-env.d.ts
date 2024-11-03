@@ -1,16 +1,14 @@
 /// <reference types="vite/client" />
 
 // latest version of quiz types
-type NewQuizSubmission = {
-  quiz_name: string;
-  quiz_category: string;
-  quiz_question: QuizQuestion[];
-};
-
 type Quiz = {
   quiz_name: string;
   quiz_category: string;
+  quiz_id: number;
+  quiz_question: QuizQuestion[];
 };
+
+type QuizSubmission = Omit<Quiz, "quiz_id">;
 
 type QuizQuestion = {
   quiz_question: string;
