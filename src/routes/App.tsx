@@ -8,7 +8,7 @@ import { useStore } from "../stores";
 function App() {
   const isDesktop = useBreakpointValue({ base: false, lg: true });
   const location = useLocation();
-  const { setQuizzes } = useStore();
+  const { setQuizzes, setQuizNavigation } = useStore();
 
   useEffect(() => {
     async function fetchData() {
@@ -16,11 +16,19 @@ function App() {
         .from("quiz")
         .select(`*, quiz_question (*, quiz_question_choice (*))`);
       if (quizData) {
+        const navData = quizData.map(
+          ({ quiz_id, quiz_category, quiz_name }) => ({
+            quiz_id,
+            quiz_category,
+            quiz_name,
+          })
+        );
+        setQuizNavigation(navData);
         setQuizzes(quizData);
       }
     }
     fetchData();
-  }, [setQuizzes]);
+  }, [setQuizzes, setQuizNavigation]);
 
   return (
     <Flex direction="column" minH="100vh">

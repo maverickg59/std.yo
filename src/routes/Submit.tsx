@@ -95,19 +95,21 @@ const Submit = () => {
               zIndex={10}
               overflow="hidden"
               align="end"
-              pr="4px"
-              pt="8px"
+              pr={2}
+              pb={2}
+              pt="9px"
               color="gray.100"
               borderRight="1px solid"
               borderColor="gray.200"
               position="absolute"
               left="0"
               height="100%"
-              width="30px"
+              width="35px"
               userSelect="none"
               roundedLeft={10}
               ref={lineNumberRef}
               spacing="0"
+              lineHeight={1.5}
               fontFamily="monospace"
               fontSize="sm"
             >
@@ -118,10 +120,12 @@ const Submit = () => {
               ))}
             </VStack>
             <Textarea
+              pt="8px"
+              py={2}
               fontFamily="monospace"
               lineHeight="1.5"
               fontSize="sm"
-              pl="40px"
+              pl="45px"
               value={quiz_string}
               onChange={(e) => handleTextAreaChange(e)}
               onScroll={(e) => handleScroll(e)}

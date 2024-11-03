@@ -21,6 +21,12 @@ type QuizQuestionChoice = {
   is_correct: boolean;
 };
 
+type QuizNavItem = {
+  quiz_id: number;
+  quiz_name: string;
+  quiz_category: string;
+};
+
 // older version of quiz types
 type Question = {
   questionId: number;
