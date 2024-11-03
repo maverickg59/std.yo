@@ -110,7 +110,7 @@ function Quiz() {
               handleRadioSelection={handleRadioSelection}
             />
             <Pagination
-              count={quiz_question.length || undefined}
+              count={quiz_question ? quiz_question.length : 0}
               pageSize={1}
               siblingCount={1}
               page={page}
