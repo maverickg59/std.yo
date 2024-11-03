@@ -13,19 +13,22 @@ import { FaCheckCircle } from "react-icons/fa";
 import { Pagination, RadioCardGroupQuestion } from "../components";
 import { useStore } from "../stores";
 import { useParams } from "react-router-dom";
-import { quizzes } from "../data";
 
 function Quiz() {
   const [reveal, setReveal] = useState(false);
+  const [value, setValue] = useState<string | undefined>(undefined);
+  const [correctAnswer, setCorrectAnswer] = useState<string | undefined>(
+    undefined
+  );
   const { colorMode } = useColorMode();
   const toast = useToast();
-  const { quiz_id } = useParams();
+  const { quiz_id: quiz_id_param } = useParams();
+
   const {
-    quiz: { quiz_name, questions },
-    quizzes: newQuizzes,
+    quiz: { quiz_name, quiz_id, quiz_question },
+    quizzes,
     page,
     setQuiz,
-    setNewQuiz,
     setPage,
     answers,
     setAnswer,
@@ -33,29 +36,34 @@ function Quiz() {
   } = useStore();
 
   useEffect(() => {
-    const quiz = quizzes.find((quiz) => quiz.quiz_id === Number(quiz_id));
-    const newQuiz = newQuizzes.find((quiz) => quiz.quiz_id === Number(quiz_id));
+    const quiz = quizzes.find((quiz) => quiz.quiz_id === Number(quiz_id_param));
     if (quiz) {
       setQuiz(quiz);
     }
-    if (newQuiz) {
-      setNewQuiz(newQuiz);
-    }
-  }, [quiz_id, setQuiz]);
+  }, [quizzes, quiz_id_param, setQuiz]);
 
   useEffect(() => {
     setReveal(false);
-  }, [page]);
 
-  const value = answers[Number(quiz_id)]?.[page] || undefined;
+    const currentQuestionId = quiz_question[page - 1]?.quiz_question_id;
+    if (currentQuestionId !== undefined) {
+      setValue(answers[quiz_id]?.[currentQuestionId] || undefined);
+      quiz_question
+        .find((question) => question.quiz_question_id === currentQuestionId)
+        ?.quiz_question_choice.forEach(({ choice_letter, is_correct }) => {
+          if (is_correct) {
+            setCorrectAnswer(choice_letter);
+          }
+        });
+    }
+  }, [page, quiz_id, quiz_question, answers]);
 
   const handleRadioSelection = (
     e: string,
     quiz_id: number,
-    questionId: number,
-    correctAnswer: string
+    quiz_question_id: number
   ) => {
-    setAnswer(Number(quiz_id), questionId, e);
+    setAnswer(quiz_id, quiz_question_id, e);
     const toastVariant = colorMode === "light" ? "subtle" : "solid";
     if (e === correctAnswer) {
       toast({
@@ -95,13 +103,14 @@ function Quiz() {
             </Text>
             <RadioCardGroupQuestion
               page={page}
-              questions={questions}
-              value={value as string}
               quiz_id={quiz_id}
+              questions={quiz_question}
+              value={value as string}
+              correctAnswer={correctAnswer as string}
               handleRadioSelection={handleRadioSelection}
             />
             <Pagination
-              count={questions.length}
+              count={quiz_question.length}
               pageSize={1}
               siblingCount={1}
               page={page}
@@ -111,7 +120,7 @@ function Quiz() {
         </Box>
         <Flex justifyContent="center" pt={4}>
           <Text visibility={reveal ? "visible" : "hidden"}>
-            Correct Answer: {questions[page - 1].correctAnswer}
+            Correct Answer: {correctAnswer}
           </Text>
         </Flex>
         <Flex
@@ -123,7 +132,7 @@ function Quiz() {
           <Button variant="text" onClick={() => setReveal(!reveal)}>
             Reveal Answer
           </Button>
-          <Button variant="text" onClick={() => resetAnswers(Number(quiz_id))}>
+          <Button variant="text" onClick={() => resetAnswers(quiz_id)}>
             Reset Answers
           </Button>
         </Flex>

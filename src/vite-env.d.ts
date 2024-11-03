@@ -1,17 +1,20 @@
 /// <reference types="vite/client" />
 
-// latest version of quiz types
 type Quiz = {
+  quiz_id: number;
   quiz_name: string;
   quiz_category: string;
-  quiz_id: number;
   quiz_question: QuizQuestion[];
 };
 
-type QuizSubmission = Omit<Quiz, "quiz_id">;
+type QuizSubmission = Omit<
+  Quiz,
+  "quiz_id" | "quiz_question_id" | "quiz_question_choice_id"
+>;
 
 type QuizQuestion = {
   quiz_question: string;
+  quiz_question_id: number;
   quiz_question_choice: QuizQuestionChoice[];
 };
 
@@ -19,32 +22,17 @@ type QuizQuestionChoice = {
   choice_letter: string;
   choice_text: string;
   is_correct: boolean;
+  quiz_question_choice_id: number;
 };
 
 type QuizNavItem = {
-  quiz_id: number;
-  quiz_name: string;
-  quiz_category: string;
-};
-
-// older version of quiz types
-type Question = {
-  questionId: number;
-  question: string;
-  choices: {
-    A: string;
-    B: string;
-    C: string;
-    D: string;
-  };
-  correctAnswer: string;
-};
-
-type QuizData = {
-  quiz_name: string;
-  quiz_id: number;
-  quiz_category: string;
-  questions: Question[];
+  category_name: string;
+  content: [
+    {
+      quiz_name: string;
+      quiz_id: number;
+    }
+  ];
 };
 
 type Answer = {

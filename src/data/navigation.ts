@@ -10,8 +10,8 @@ export const navPaths = {
       category_icon: FaLinux,
       content: [
         {
-          id: 10001,
-          name: "Linux Commands",
+          quiz_id: 10001,
+          quiz_name: "Linux Commands",
         },
       ],
     },
@@ -20,8 +20,8 @@ export const navPaths = {
       category_icon: FaHtml5,
       content: [
         {
-          id: 10003,
-          name: "HTML Tags",
+          quiz_id: 10003,
+          quiz_name: "HTML Tags",
         },
       ],
     },
@@ -30,8 +30,8 @@ export const navPaths = {
       category_icon: FaCss3Alt,
       content: [
         {
-          id: 10004,
-          name: "CSS Atributes",
+          quiz_id: 10004,
+          quiz_name: "CSS Atributes",
         },
       ],
     },
@@ -40,8 +40,8 @@ export const navPaths = {
       category_icon: FaJsSquare,
       content: [
         {
-          id: 10002,
-          name: "JavaScript Arrays",
+          quiz_id: 10002,
+          quiz_name: "JavaScript Arrays",
         },
       ],
     },
@@ -52,8 +52,8 @@ export const navPaths = {
       category_icon: FaLinux,
       content: [
         {
-          id: 20001,
-          name: "JavaScript Arrays",
+          quiz_id: 20001,
+          quiz_name: "JavaScript Arrays",
         },
       ],
     },
@@ -62,8 +62,8 @@ export const navPaths = {
       category_icon: RiCriminalLine,
       content: [
         {
-          id: 20002,
-          name: "Threat Groups",
+          quiz_id: 20002,
+          quiz_name: "Threat Groups",
         },
       ],
     },

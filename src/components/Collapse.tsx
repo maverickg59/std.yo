@@ -16,7 +16,7 @@ import { usePathBase } from "../hooks";
 
 type Props = {
   name: string;
-  content: { id: number; name: string }[];
+  content: { quiz_id: number; quiz_name: string }[];
   icon: IconType;
   urlBasePath: string;
 };
@@ -48,15 +48,15 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
           py="1"
         >
           {content
-            ? content.map(({ name, id }) => (
+            ? content.map(({ quiz_name, quiz_id }) => (
                 <Link
                   onClick={() =>
                     pathBase === "quiz" ? setQuizPage(1) : setFlashcardPage(1)
                   }
-                  to={`${urlBasePath}/${id}`}
-                  key={name}
+                  to={`${urlBasePath}/${quiz_id}`}
+                  key={quiz_name}
                 >
-                  {name}
+                  {quiz_name}
                 </Link>
               ))
             : null}

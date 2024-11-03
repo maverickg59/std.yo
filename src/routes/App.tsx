@@ -16,14 +16,24 @@ function App() {
         .from("quiz")
         .select(`*, quiz_question (*, quiz_question_choice (*))`);
       if (quizData) {
-        const navData = quizData.map(
-          ({ quiz_id, quiz_category, quiz_name }) => ({
-            quiz_id,
-            quiz_category,
-            quiz_name,
-          })
+        const categorizedQuizzes = quizData.reduce(
+          (acc, { quiz_id, quiz_category, quiz_name }) => {
+            if (!acc[quiz_category]) {
+              acc[quiz_category] = {
+                category_name: quiz_category,
+                content: [],
+              };
+            }
+            acc[quiz_category].content.push({
+              quiz_id: quiz_id,
+              quiz_name: quiz_name,
+            });
+
+            return acc;
+          },
+          {}
         );
-        setQuizNavigation(navData);
+        setQuizNavigation(categorizedQuizzes);
         setQuizzes(quizData);
       }
     }

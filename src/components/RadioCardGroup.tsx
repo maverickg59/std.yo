@@ -142,14 +142,14 @@ const CheckIcon = createIcon({
 
 type RCGQProps = {
   page: number;
-  questions: Question[];
+  questions: QuizQuestion[];
   value: string | undefined;
-  quiz_id: string | undefined;
+  quiz_id: number;
+  correctAnswer: string;
   handleRadioSelection: (
     e: string,
     quiz_id: number,
-    questionId: number,
-    correctAnswer: string
+    quiz_question_id: number
   ) => void;
 };
 
@@ -157,48 +157,56 @@ export const RadioCardGroupQuestion = ({
   page,
   questions,
   value,
-  quiz_id = "10000",
+  quiz_id,
   handleRadioSelection,
 }: RCGQProps) => {
   const { colorMode } = useColorMode();
-  const questionsArr = questions.map(
-    ({ question, questionId, choices, correctAnswer }, i) => (
-      <>
-        <Stack>
-          <Text textStyle="md" fontWeight="medium">
-            Question {i + 1}:
-          </Text>
-          <Text textStyle="md" color="fg.muted">
-            {question}
-          </Text>
-        </Stack>
-        <RadioCardGroup
-          key={question}
-          value={value}
-          name={question}
-          spacing="8"
-          onChange={(e) =>
-            handleRadioSelection(e, Number(quiz_id), questionId, correctAnswer)
-          }
-        >
-          {Object.entries(choices).map(([key, value]) => (
-            <RadioCard
-              colorMode={colorMode}
-              key={value}
-              value={key}
-              isCorrect={key === correctAnswer}
-            >
-              <Text color="fg.emphasized" fontWeight="medium" fontSize="sm">
-                Option {key}
-              </Text>
-              <Text color="fg.muted" textStyle="sm">
-                {value}
-              </Text>
-            </RadioCard>
-          ))}
-        </RadioCardGroup>
-      </>
-    )
+  const quizQuestions = questions.map(
+    ({ quiz_question, quiz_question_id, quiz_question_choice }, i) => {
+      return (
+        <>
+          <Stack>
+            <Text textStyle="md" fontWeight="medium">
+              Question {i + 1}:
+            </Text>
+            <Text textStyle="md" color="fg.muted">
+              {quiz_question}
+            </Text>
+          </Stack>
+          <RadioCardGroup
+            key={quiz_question}
+            value={value}
+            name={quiz_question}
+            spacing="8"
+            onChange={(e) => handleRadioSelection(e, quiz_id, quiz_question_id)}
+          >
+            {quiz_question_choice.map(
+              ({ choice_letter, choice_text, is_correct }) => {
+                return (
+                  <RadioCard
+                    colorMode={colorMode}
+                    key={choice_text}
+                    value={choice_letter}
+                    isCorrect={is_correct}
+                  >
+                    <Text
+                      color="fg.emphasized"
+                      fontWeight="medium"
+                      fontSize="sm"
+                    >
+                      Option {choice_letter}
+                    </Text>
+                    <Text color="fg.muted" textStyle="sm">
+                      {choice_text}
+                    </Text>
+                  </RadioCard>
+                );
+              }
+            )}
+          </RadioCardGroup>
+        </>
+      );
+    }
   );
-  return questionsArr[page - 1];
+  return quizQuestions[page - 1];
 };
