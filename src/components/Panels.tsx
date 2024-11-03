@@ -23,6 +23,7 @@ const { flashcards } = navPaths;
 
 export const QuizPanel = () => {
   const { quiz_navigation } = useStore();
+
   return (
     <TabPanel p={0}>
       <Stack spacing="1">

@@ -1,51 +1,9 @@
 import { MdQuiz, MdOutlineContentPasteSearch } from "react-icons/md";
 import { IoFlashlightSharp } from "react-icons/io5";
-import { FaLinux, FaHtml5, FaCss3Alt, FaJsSquare } from "react-icons/fa";
+import { FaLinux } from "react-icons/fa";
 import { RiCriminalLine } from "react-icons/ri";
 
 export const navPaths = {
-  quizzes: {
-    linux: {
-      category_name: "Linux",
-      category_icon: FaLinux,
-      content: [
-        {
-          quiz_id: 10001,
-          quiz_name: "Linux Commands",
-        },
-      ],
-    },
-    html: {
-      category_name: "HTML",
-      category_icon: FaHtml5,
-      content: [
-        {
-          quiz_id: 10003,
-          quiz_name: "HTML Tags",
-        },
-      ],
-    },
-    css: {
-      category_name: "CSS",
-      category_icon: FaCss3Alt,
-      content: [
-        {
-          quiz_id: 10004,
-          quiz_name: "CSS Atributes",
-        },
-      ],
-    },
-    javascript: {
-      category_name: "JavaScript",
-      category_icon: FaJsSquare,
-      content: [
-        {
-          quiz_id: 10002,
-          quiz_name: "JavaScript Arrays",
-        },
-      ],
-    },
-  },
   flashcards: {
     linux: {
       category_name: "JavaScript",
@@ -76,7 +34,7 @@ export const appFeatures = [
     description:
       "Concise quizzes crafted to reinforce your knowledge and enhance your learning experience.",
     icon: MdQuiz,
-    href: "/quiz/10001",
+    href: "/quiz/39",
     linkName: "Try a quiz",
     linksInternally: true,
   },

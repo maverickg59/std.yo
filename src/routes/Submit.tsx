@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState, useRef } from "react";
-import { assert } from "superstruct";
+import { assert, is } from "superstruct";
 import { useStore } from "../stores";
 import { supabase } from "../utils";
 import { QuizSchema } from "../validation";
@@ -27,8 +27,9 @@ const Submit = () => {
   } = useStore();
 
   const handleSubmit = async () => {
+    console.log("Submitting quiz:", json_quiz);
     const { data, error } = await supabase.rpc("insert_quiz", {
-      json_quiz,
+      quiz: json_quiz,
     });
     if (error) {
       console.error("Error submitting quiz:", error);
@@ -56,7 +57,8 @@ const Submit = () => {
     setQuizError("");
     try {
       const parsed = JSON.parse(text);
-      const isValidDataStructure = assert(JSON.parse(text), QuizSchema);
+      assert(JSON.parse(text), QuizSchema);
+      const isValidDataStructure = is(parsed, QuizSchema);
       if (isValidJSON(parsed) && isValidDataStructure) {
         setQuizSubmission(JSON.parse(text));
       }

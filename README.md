@@ -116,26 +116,24 @@ Array.length()
 ## Road Map:
 
 1. add home button to mobile navigation
-2. on desktop and mobile keep open nav accordions on navigate
-3. on mobile close nav menu on navigate
-4. beautify content layout for /, /quiz, /layout
-5. randomize initial display of term or description
-6. allow user to upload pdf
-7. integrate authentication and authorization flow
-8. call OpenAI to create quiz from pdf content (auth users only)
-9. add ChatGPT promptability (auth users only)
+2. on mobile close nav menu on navigate
+3. beautify content layout for /, /quiz, /layout
+4. flashcards: randomize initial display of term or description
+5. call OpenAI to create quiz
 
 ### Supabase integration:
-2. store quizzes in supabase via RPC function
+
 3. store flashcards in supabase via RPC function
-4. store nav links in supabase via RPC function
 
 ### Quiz Topics:
-- 
+
+-
+
 ### Flashcard Topics:
+
 - linux filesystem
 - linux file permissions
 - linux commands
-	- 100 of them
+  - 100 of them
 - linux distros
 - absolute vs relative path
