@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Box, Text } from "@chakra-ui/react";
 
-const Flashcard = ({ term, definition }: Flashcard) => {
+const Flashcard = ({
+  term,
+  definition,
+}: Omit<Flashcard, "flashcard_pack_id" | "flashcard_id">) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleFlip = () => {
@@ -31,10 +34,12 @@ const Flashcard = ({ term, definition }: Flashcard) => {
     </Box>
   );
 };
+
 type FPProps = {
   flashcardPack: Flashcard[];
   page: number;
 };
+
 export const FlashcardPack = ({ flashcardPack, page }: FPProps) => {
   const flashcardsArr = flashcardPack.map(({ term, definition }) => (
     <Flashcard key={term} term={term} definition={definition} />

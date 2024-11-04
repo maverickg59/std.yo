@@ -30,16 +30,20 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
   const { setPage: setQuizPage, setPage: setFlashcardPage } = useStore();
   const pathBase = usePathBase();
   const { quiz_id: quiz_id_param } = useParams();
+  const { flashcard_id: flashcard_id_param } = useParams();
 
   const isRenderedQuiz = content.some(
     (item) => item.content_id === Number(quiz_id_param)
   );
+  const isRenderedFlashcard = content.some(
+    (item) => item.content_id === Number(flashcard_id_param)
+  );
 
   useEffect(() => {
-    if (isRenderedQuiz) {
+    if (isRenderedQuiz || isRenderedFlashcard) {
       onOpen();
     }
-  }, [quiz_id_param, isRenderedQuiz, onOpen]);
+  }, [quiz_id_param, isRenderedQuiz, isRenderedFlashcard, onOpen]);
 
   return (
     <Box>
@@ -71,8 +75,14 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
             ? content.map(({ content_name, content_id }) => (
                 <Box
                   fontSize="sm"
-                  boxShadow={isRenderedQuiz ? boxShadow : undefined}
-                  backgroundColor={isRenderedQuiz ? bgColor : undefined}
+                  boxShadow={
+                    isRenderedQuiz || isRenderedFlashcard
+                      ? boxShadow
+                      : undefined
+                  }
+                  backgroundColor={
+                    isRenderedQuiz || isRenderedFlashcard ? bgColor : undefined
+                  }
                   px={4}
                   py={1}
                   borderRadius={2}
