@@ -29,21 +29,17 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
   const { isOpen, onToggle, onOpen } = useDisclosure();
   const { setPage: setQuizPage, setPage: setFlashcardPage } = useStore();
   const pathBase = usePathBase();
-  const { quiz_id: quiz_id_param } = useParams();
-  const { flashcard_id: flashcard_id_param } = useParams();
-
-  const isRenderedQuiz = content.some(
-    (item) => item.content_id === Number(quiz_id_param)
-  );
-  const isRenderedFlashcard = content.some(
-    (item) => item.content_id === Number(flashcard_id_param)
-  );
+  const { quiz_id: quiz_id_param, flashcard_id: flashcard_id_param } =
+    useParams();
 
   useEffect(() => {
-    if (isRenderedQuiz || isRenderedFlashcard) {
+    const isRendered = content.some(
+      (item) => item.content_id === Number(quiz_id_param || flashcard_id_param)
+    );
+    if (isRendered) {
       onOpen();
     }
-  }, [quiz_id_param, isRenderedQuiz, isRenderedFlashcard, onOpen]);
+  }, [content, quiz_id_param, flashcard_id_param, onOpen]);
 
   return (
     <Box>
@@ -72,35 +68,35 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
           py="1"
         >
           {content
-            ? content.map(({ content_name, content_id }) => (
-                <Box
-                  fontSize="sm"
-                  boxShadow={
-                    isRenderedQuiz || isRenderedFlashcard
-                      ? boxShadow
-                      : undefined
-                  }
-                  backgroundColor={
-                    isRenderedQuiz || isRenderedFlashcard ? bgColor : undefined
-                  }
-                  px={4}
-                  py={1}
-                  borderRadius={2}
-                  listStyleType="none"
-                  as="li"
-                  key={content_name}
-                >
-                  <Link
-                    onClick={() =>
-                      pathBase === "quiz" ? setQuizPage(1) : setFlashcardPage(1)
-                    }
-                    to={`${urlBasePath}/${content_id}`}
+            ? content.map(({ content_name, content_id }) => {
+                const isRendered =
+                  content_id === Number(quiz_id_param || flashcard_id_param);
+                return (
+                  <Box
+                    fontSize="sm"
+                    boxShadow={isRendered ? boxShadow : undefined}
+                    backgroundColor={isRendered ? bgColor : undefined}
+                    px={4}
+                    py={1}
+                    borderRadius={2}
+                    listStyleType="none"
+                    as="li"
                     key={content_name}
                   >
-                    {content_name}
-                  </Link>
-                </Box>
-              ))
+                    <Link
+                      onClick={() =>
+                        pathBase === "quiz"
+                          ? setQuizPage(1)
+                          : setFlashcardPage(1)
+                      }
+                      to={`${urlBasePath}/${content_id}`}
+                      key={content_name}
+                    >
+                      {content_name}
+                    </Link>
+                  </Box>
+                );
+              })
             : null}
         </Stack>
       </ChakraCollapse>

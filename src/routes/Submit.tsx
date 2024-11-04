@@ -47,7 +47,10 @@ const Submit = () => {
     if (error) {
       console.error("Error submitting quiz:", error);
     } else {
-      console.log("Quiz submitted successfully:", data);
+      console.log(
+        `${isQuiz ? "Quiz" : "Flashcard pack"} submitted successfully:`,
+        data
+      );
     }
   };
 
