@@ -134,6 +134,5 @@ Array.length()
 - linux filesystem
 - linux file permissions
 - linux commands
-  - 100 of them
 - linux distros
 - absolute vs relative path

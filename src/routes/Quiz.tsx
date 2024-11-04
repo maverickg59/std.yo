@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { FaCheckCircle } from "react-icons/fa";
 import { Pagination, RadioCardGroupQuestion } from "../components";
-import { useStore } from "../stores";
+import { useStore, useAnswersStore } from "../stores";
 import { useParams } from "react-router-dom";
 
 function Quiz() {
@@ -24,16 +24,8 @@ function Quiz() {
   const toast = useToast();
   const { quiz_id: quiz_id_param } = useParams();
 
-  const {
-    quiz,
-    quizzes,
-    page,
-    setQuiz,
-    setPage,
-    answers,
-    setAnswer,
-    resetAnswers,
-  } = useStore();
+  const { quiz, quizzes, page, setQuiz, setPage } = useStore();
+  const { answers, setAnswer, resetAnswers } = useAnswersStore();
 
   const { quiz_id, quiz_name, quiz_question } = quiz || {};
 

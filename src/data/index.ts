@@ -7,7 +7,7 @@ import { threatThreeFlashcard } from "./flashcards/threat_three";
 import { threatFourFlashcard } from "./flashcards/threat_four";
 import { threatFiveFlashcard } from "./flashcards/threat_five";
 
-export { navPaths, appFeatures } from "./navigation";
+export { appFeatures } from "./navigation";
 
 export const flashcards = [
   javascriptFlashcard,
