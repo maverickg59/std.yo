@@ -13,24 +13,32 @@ import { useState, useRef } from "react";
 import { assert, is } from "superstruct";
 import { useStore } from "../stores";
 import { supabase } from "../utils";
-import { QuizSchema } from "../validation";
-import { flashcard } from "../data/flashcards/default";
+import { QuizSchema, FlashcardPackSchema } from "../validation";
 
 const Submit = () => {
   const [lineCount, setLineCount] = useState(1);
   const [uploadType, setUploadType] = useState("quiz");
+  const isQuiz = uploadType === "quiz";
   const lineNumberRef = useRef<HTMLDivElement | null>(null);
   const {
     quiz_submission: { quiz_string, quiz_error, json_quiz },
+    flashcard_submission: {
+      flashcard_pack_string,
+      flashcard_pack_error,
+      json_flashcard_pack,
+    },
     setQuizString,
     setQuizError,
     setQuizSubmission,
+    setFlashcardPackString,
+    setFlashcardPackError,
+    setFlashcardPackSubmission,
   } = useStore();
 
   const handleSubmit = async () => {
     const payload = {
       quiz: { quiz: json_quiz },
-      flashcard: { flashcard_pack: flashcard },
+      flashcard: { flashcard_pack: json_flashcard_pack },
     };
     const { data, error } = await supabase.rpc(
       `insert_${uploadType}`,
@@ -55,21 +63,42 @@ const Submit = () => {
     const lines = e.target.value.split("\n").length;
     const text = e.target.value;
     setLineCount(lines);
-    if (text.length === 0) {
-      setQuizSubmission({} as QuizSubmission);
-    }
-    setQuizString(text);
-    setQuizError("");
-    try {
-      const parsed = JSON.parse(text);
-      assert(JSON.parse(text), QuizSchema);
-      const isValidDataStructure = is(parsed, QuizSchema);
-      if (isValidJSON(parsed) && isValidDataStructure) {
-        setQuizSubmission(JSON.parse(text));
+    if (isQuiz) {
+      console.log("quiz");
+      if (text.length === 0) {
+        setQuizSubmission({} as QuizSubmission);
       }
-    } catch (e: unknown) {
-      if (e instanceof Error && text.length > 0) {
-        setQuizError(e.message);
+      setQuizString(text);
+      setQuizError("");
+      try {
+        const parsed = JSON.parse(text);
+        assert(JSON.parse(text), QuizSchema);
+        const isValidDataStructure = is(parsed, QuizSchema);
+        if (isValidJSON(parsed) && isValidDataStructure) {
+          setQuizSubmission(JSON.parse(text));
+        }
+      } catch (e: unknown) {
+        if (e instanceof Error && text.length > 0) {
+          setQuizError(e.message);
+        }
+      }
+    } else {
+      if (text.length === 0) {
+        setFlashcardPackSubmission({} as FlashcardPackSubmission);
+      }
+      setFlashcardPackString(text);
+      setFlashcardPackError("");
+      try {
+        const parsed = JSON.parse(text);
+        assert(JSON.parse(text), FlashcardPackSchema);
+        const isValidDataStructure = is(parsed, FlashcardPackSchema);
+        if (isValidJSON(parsed) && isValidDataStructure) {
+          setFlashcardPackSubmission(JSON.parse(text));
+        }
+      } catch (e: unknown) {
+        if (e instanceof Error && text.length > 0) {
+          setFlashcardPackError(e.message);
+        }
       }
     }
   };
@@ -133,16 +162,18 @@ const Submit = () => {
               lineHeight="1.5"
               fontSize="sm"
               pl="45px"
-              value={quiz_string}
+              value={isQuiz ? quiz_string : flashcard_pack_string}
               onChange={(e) => handleTextAreaChange(e)}
               onScroll={(e) => handleScroll(e)}
-              placeholder="Place your quiz object here"
+              placeholder={`Place your ${
+                isQuiz ? "quiz" : "flashcard pack"
+              } object here`}
               height="50vh"
               resize="vertical"
             />
           </Box>
           <Text color="red.500" height="20px">
-            {quiz_error}
+            {isQuiz ? quiz_error : flashcard_pack_error}
           </Text>
           <Button onClick={handleSubmit} colorScheme="blue">
             Submit

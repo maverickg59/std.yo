@@ -38,17 +38,17 @@ type FlashcardPack = {
   flashcard_pack_content: FlashcardContent[];
 };
 
-type FlashcardPackSubmission = Omit<
-  FlashcardPack,
-  "flashcard_pack_id" | "flashcard_id"
->;
-
 type Flashcard = {
   flashcard_pack_id: number;
   flashcard_id: number;
   term: string;
   definition: string;
 };
+
+type FlashcardPackSubmission = Omit<
+  FlashcardPack,
+  "flashcard_pack_id" | "flashcard_id"
+>;
 
 type ContentNavItem = {
   category_name: string;

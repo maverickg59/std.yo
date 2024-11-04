@@ -16,7 +16,7 @@ export const appFeatures = [
     description:
       "Interactive flashcards designed to strengthen your recall and support effective learning.",
     icon: IoFlashlightSharp,
-    href: "/flashcards/20001",
+    href: "/flashcards/5",
     linkName: "Try some flashcards",
     linksInternally: true,
   },
