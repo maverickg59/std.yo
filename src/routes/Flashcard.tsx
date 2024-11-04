@@ -2,26 +2,26 @@ import { Container, Box, Stack, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FlashcardPack, Pagination } from "../components";
-import { flashcards } from "../data";
 import { useStore } from "../stores";
 
 const FlashcardList = () => {
-  const { flashcard_id } = useParams();
+  const { flashcard_id: flashcard_id_param } = useParams();
   const {
-    flashcards: { flashcard_pack, flashcard_pack_name },
+    flashcard_pack: { flashcard_pack_name, flashcard_pack_content },
+    flashcards,
     page,
     setPage,
-    setFlashcards,
+    setFlashcardPack,
   } = useStore();
 
   useEffect(() => {
-    const flashcard = flashcards.find(
-      (flashcard) => flashcard.flashcard_pack_id === Number(flashcard_id)
+    const flashcard_pack = flashcards.find(
+      (flashcard) => flashcard.flashcard_pack_id === Number(flashcard_id_param)
     );
-    if (flashcard) {
-      setFlashcards(flashcard);
+    if (flashcard_pack) {
+      setFlashcardPack(flashcard_pack);
     }
-  }, [flashcard_id, setFlashcards]);
+  }, [flashcards, flashcard_id_param, setFlashcardPack]);
 
   return (
     <Container centerContent={true} maxW="100%">
@@ -37,9 +37,14 @@ const FlashcardList = () => {
             <Text textStyle="lg" fontWeight="medium">
               {flashcard_pack_name}
             </Text>
-            <FlashcardPack flashcardPack={flashcard_pack} page={page} />
+            {flashcard_pack_content && (
+              <FlashcardPack
+                flashcardPack={flashcard_pack_content}
+                page={page}
+              />
+            )}
             <Pagination
-              count={flashcard_pack.length}
+              count={flashcard_pack_content?.length || 0}
               pageSize={1}
               siblingCount={1}
               page={page}

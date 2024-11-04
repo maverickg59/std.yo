@@ -25,32 +25,37 @@ type QuizQuestionChoice = {
   quiz_question_choice_id: number;
 };
 
-type QuizNavItem = {
-  category_name: string;
-  content: [
-    {
-      quiz_name: string;
-      quiz_id: number;
-    }
-  ];
-};
-
 type Answer = {
   [quizId: number]: {
     [questionId: number]: string;
   };
 };
 
+type FlashcardPack = {
+  flashcard_pack_name: string;
+  flashcard_pack_id: number;
+  flashcard_pack_category: string;
+  flashcard_pack_content: FlashcardContent[];
+};
+
+type FlashcardPackSubmission = Omit<
+  FlashcardPack,
+  "flashcard_pack_id" | "flashcard_id"
+>;
+
 type Flashcard = {
+  flashcard_pack_id: number;
+  flashcard_id: number;
   term: string;
   definition: string;
 };
 
-type FlashcardData = {
-  flashcard_pack_name: string;
-  flashcard_pack_id: number;
-  flashcard_category: string;
-  flashcard_pack: Flashcard[];
+type ContentNavItem = {
+  category_name: string;
+  content: [
+    {
+      content_name: string;
+      content_id: number;
+    }
+  ];
 };
-
-type Category = "linux" | "html" | "css" | "javascript";

@@ -7,6 +7,7 @@ import {
   Stack,
   Text,
   useDisclosure,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import { FiChevronDown } from "react-icons/fi";
@@ -17,19 +18,21 @@ import { useEffect } from "react";
 
 type Props = {
   name: string;
-  content: { quiz_id: number; quiz_name: string }[];
+  content: { content_id: number; content_name: string }[];
   icon: IconType;
   urlBasePath: string;
 };
 
 export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
+  const bgColor = useColorModeValue(undefined, "gray.700");
+  const boxShadow = useColorModeValue("lg", "inner");
   const { isOpen, onToggle, onOpen } = useDisclosure();
   const { setPage: setQuizPage, setPage: setFlashcardPage } = useStore();
   const pathBase = usePathBase();
   const { quiz_id: quiz_id_param } = useParams();
 
   const isRenderedQuiz = content.some(
-    (item) => item.quiz_id === Number(quiz_id_param)
+    (item) => item.content_id === Number(quiz_id_param)
   );
 
   useEffect(() => {
@@ -44,6 +47,7 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
         variant="tertiary"
         onClick={onToggle}
         justifyContent="space-between"
+        alignContent="flex-start"
         width="full"
       >
         <HStack spacing="3">
@@ -60,30 +64,30 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
           whiteSpace="nowrap"
           spacing="1"
           alignItems="flex-start"
-          px="8"
+          px="4"
           py="1"
         >
           {content
-            ? content.map(({ quiz_name, quiz_id }) => (
+            ? content.map(({ content_name, content_id }) => (
                 <Box
                   fontSize="sm"
-                  boxShadow={isRenderedQuiz ? "inner" : undefined}
-                  backgroundColor={isRenderedQuiz ? "gray.700" : undefined}
+                  boxShadow={isRenderedQuiz ? boxShadow : undefined}
+                  backgroundColor={isRenderedQuiz ? bgColor : undefined}
                   px={4}
                   py={1}
                   borderRadius={2}
                   listStyleType="none"
                   as="li"
-                  key={quiz_name}
+                  key={content_name}
                 >
                   <Link
                     onClick={() =>
                       pathBase === "quiz" ? setQuizPage(1) : setFlashcardPage(1)
                     }
-                    to={`${urlBasePath}/${quiz_id}`}
-                    key={quiz_name}
+                    to={`${urlBasePath}/${content_id}`}
+                    key={content_name}
                   >
-                    {quiz_name}
+                    {content_name}
                   </Link>
                 </Box>
               ))

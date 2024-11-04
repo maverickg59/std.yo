@@ -18,15 +18,14 @@ type QuizActions = {
 export type Quizzes = QuizState & QuizActions;
 
 export const createQuizSlice: StateCreator<Quizzes> = (set) => ({
+  page: 1,
   answers: {},
   quizzes: [],
   quiz: {} as Quiz,
-  page: 1,
   setPage: (page) => set((state) => ({ ...state, page })),
-  setQuiz: (quiz: Quiz) => set((state) => ({ ...state, quiz, page: 1 })),
-  setQuizzes: (quizzes: Quiz[]) =>
-    set((state) => ({ ...state, quizzes, page: 1 })),
-  setAnswer: (quiz_id: number, question_id: number, answer: string) => {
+  setQuiz: (quiz) => set((state) => ({ ...state, quiz, page: 1 })),
+  setQuizzes: (quizzes) => set((state) => ({ ...state, quizzes, page: 1 })),
+  setAnswer: (quiz_id, question_id, answer) => {
     set((state) => ({
       ...state,
       answers: {
@@ -35,7 +34,7 @@ export const createQuizSlice: StateCreator<Quizzes> = (set) => ({
       },
     }));
   },
-  resetAnswers: (quiz_id: number) =>
+  resetAnswers: (quiz_id) =>
     set((state) => {
       const newState = {
         ...state,

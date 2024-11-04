@@ -1,13 +1,13 @@
 import { MdQuiz, MdOutlineContentPasteSearch } from "react-icons/md";
 import { IoFlashlightSharp } from "react-icons/io5";
-import { FaLinux } from "react-icons/fa";
+import { FaJsSquare } from "react-icons/fa";
 import { RiCriminalLine } from "react-icons/ri";
 
 export const navPaths = {
   flashcards: {
     linux: {
       category_name: "JavaScript",
-      category_icon: FaLinux,
+      category_icon: FaJsSquare,
       content: [
         {
           quiz_id: 20001,

@@ -14,6 +14,7 @@ import { assert, is } from "superstruct";
 import { useStore } from "../stores";
 import { supabase } from "../utils";
 import { QuizSchema } from "../validation";
+import { flashcard } from "../data/flashcards/default";
 
 const Submit = () => {
   const [lineCount, setLineCount] = useState(1);
@@ -27,10 +28,14 @@ const Submit = () => {
   } = useStore();
 
   const handleSubmit = async () => {
-    console.log("Submitting quiz:", json_quiz);
-    const { data, error } = await supabase.rpc("insert_quiz", {
-      quiz: json_quiz,
-    });
+    const payload = {
+      quiz: { quiz: json_quiz },
+      flashcard: { flashcard_pack: flashcard },
+    };
+    const { data, error } = await supabase.rpc(
+      `insert_${uploadType}`,
+      payload[uploadType as keyof typeof payload]
+    );
     if (error) {
       console.error("Error submitting quiz:", error);
     } else {
