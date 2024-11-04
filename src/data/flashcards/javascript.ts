@@ -1,4 +1,4 @@
-export const javascriptFlashcard: FlashcardData = {
+export const javascriptFlashcard = {
   flashcard_pack_name: "JavaScript Array Methods",
   flashcard_pack_id: 20001,
   flashcard_category: "javascript",

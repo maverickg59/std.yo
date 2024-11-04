@@ -1,4 +1,4 @@
-export const threatTwoFlashcard: FlashcardData = {
+export const threatTwoFlashcard = {
   flashcard_pack_name: "Threat Actors",
   flashcard_pack_id: 20002,
   flashcard_category: "cybersecurity",
