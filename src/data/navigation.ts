@@ -20,13 +20,4 @@ export const appFeatures = [
     linkName: "Try some flashcards",
     linksInternally: true,
   },
-  {
-    name: "Content Request",
-    description:
-      "Request a subject by sending an email or making a pull request on GitHub.",
-    icon: MdOutlineContentPasteSearch,
-    href: "https://github.com/maverickg59/std.yo",
-    linkName: "Make pull request",
-    linksInternally: false,
-  },
 ];
