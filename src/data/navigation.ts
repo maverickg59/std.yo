@@ -1,4 +1,4 @@
-import { MdQuiz, MdOutlineContentPasteSearch } from "react-icons/md";
+import { MdQuiz } from "react-icons/md";
 import { IoFlashlightSharp } from "react-icons/io5";
 
 export const appFeatures = [
