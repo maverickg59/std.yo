@@ -1,11 +1,14 @@
 import { useEffect } from "react";
-import { supabase } from "../utils";
 import { Flex, useBreakpointValue } from "@chakra-ui/react";
 import { SidebarNavigation, HeaderNavigation, Features } from "../components";
 import { Outlet, useLocation } from "react-router-dom";
 import { useStore } from "../stores";
 
 function App() {
+  const dev = import.meta.env.MODE === "development";
+  const endpoint = dev
+    ? import.meta.env.VITE_DEV_STUDY_ENDPOINT_URL
+    : import.meta.env.VITE_STUDY_ENDPOINT_URL;
   const isDesktop = useBreakpointValue({ base: false, lg: true });
   const location = useLocation();
   const {
@@ -15,62 +18,40 @@ function App() {
     setFlashcardNavigation,
   } = useStore();
 
+  async function fetchData(endpoint: string, path: string) {
+    const response = await fetch(`${endpoint}${path}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    return await response.json();
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const { data: quizData } = await supabase
-        .from("quiz")
-        .select(`*, quiz_question (*, quiz_question_choice (*))`);
-
-      const { data: flashcardData } = await supabase
-        .from("flashcard_pack")
-        .select(`*, flashcard_pack_content (*)`);
-
-      if (flashcardData) {
-        const categorizedFlashcards = flashcardData.reduce(
-          (
-            acc,
-            { flashcard_pack_id, flashcard_pack_category, flashcard_pack_name }
-          ) => {
-            if (!acc[flashcard_pack_category]) {
-              acc[flashcard_pack_category] = {
-                category_name: flashcard_pack_category,
-                content: [],
-              };
-            }
-            acc[flashcard_pack_category].content.push({
-              content_id: flashcard_pack_id,
-              content_name: flashcard_pack_name,
-            });
-            return acc;
-          },
-          {}
-        );
-        setFlashcardNavigation(categorizedFlashcards);
-        setFlashcards(flashcardData);
-      }
+    async function getAppData() {
+      const quizData = await fetchData(endpoint, "/api/quizzes");
+      const flashcardData = await fetchData(endpoint, "/api/flashcards");
       if (quizData) {
-        const categorizedQuizzes = quizData.reduce(
-          (acc, { quiz_id, quiz_category, quiz_name }) => {
-            if (!acc[quiz_category]) {
-              acc[quiz_category] = {
-                category_name: quiz_category,
-                content: [],
-              };
-            }
-            acc[quiz_category].content.push({
-              content_id: quiz_id,
-              content_name: quiz_name,
-            });
-            return acc;
-          },
-          {}
-        );
-        setQuizNavigation(categorizedQuizzes);
-        setQuizzes(quizData);
+        setQuizNavigation(quizData.quiz_navigation_data);
+        setQuizzes(quizData.quiz_data);
+      }
+      if (flashcardData) {
+        setFlashcardNavigation(flashcardData.flashcard_pack_navigation_data);
+        setFlashcards(flashcardData.flashcard_pack_data);
       }
     }
-    fetchData();
-  }, [setQuizzes, setQuizNavigation, setFlashcards, setFlashcardNavigation]);
+    getAppData();
+  }, [
+    endpoint,
+    setQuizzes,
+    setQuizNavigation,
+    setFlashcards,
+    setFlashcardNavigation,
+  ]);
 
   return (
     <Flex direction="column" minH="100vh">

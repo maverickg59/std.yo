@@ -34,7 +34,7 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
 
   useEffect(() => {
     const isRendered = content.some(
-      (item) => item.content_id === Number(quiz_id_param || flashcard_id_param)
+      (item) => item.content_id === Number(quiz_id_param ?? flashcard_id_param)
     );
     if (isRendered) {
       onOpen();
@@ -70,7 +70,7 @@ export const Collapse = ({ name, content, icon, urlBasePath }: Props) => {
           {content
             ? content.map(({ content_name, content_id }) => {
                 const isRendered =
-                  content_id === Number(quiz_id_param || flashcard_id_param);
+                  content_id === Number(quiz_id_param ?? flashcard_id_param);
                 return (
                   <Box
                     fontSize="sm"

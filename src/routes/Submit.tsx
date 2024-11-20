@@ -12,10 +12,35 @@ import {
 import { useState, useRef } from "react";
 import { assert, is } from "superstruct";
 import { useStore } from "../stores";
-import { supabase } from "../utils";
 import { QuizSchema, FlashcardPackSchema } from "../validation";
 
+async function fetchData(
+  method: string,
+  endpoint: string,
+  path: string,
+  token: string,
+  body: string
+) {
+  const response = await fetch(`${endpoint}${path}`, {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body,
+  });
+  if (!response.ok) {
+    throw new Error(`Response status: ${response.status}`);
+  }
+  return await response.json();
+}
+
 const Submit = () => {
+  const dev = import.meta.env.MODE === "development";
+  const endpoint = dev
+    ? import.meta.env.VITE_DEV_STUDY_ENDPOINT_URL
+    : import.meta.env.VITE_STUDY_ENDPOINT_URL;
+  const token = import.meta.env.VITE_LOCAL_AUTH_KEY;
   const [lineCount, setLineCount] = useState(1);
   const [uploadType, setUploadType] = useState("quiz");
   const isQuiz = uploadType === "quiz";
@@ -36,21 +61,24 @@ const Submit = () => {
   } = useStore();
 
   const handleSubmit = async () => {
-    const payload = {
-      quiz: { quiz: json_quiz },
-      flashcard: { flashcard_pack: json_flashcard_pack },
-    };
-    const { data, error } = await supabase.rpc(
-      `insert_${uploadType}`,
-      payload[uploadType as keyof typeof payload]
-    );
-    if (error) {
-      console.error("Error submitting quiz:", error);
-    } else {
-      console.log(
-        `${isQuiz ? "Quiz" : "Flashcard pack"} submitted successfully:`,
-        data
+    if (isQuiz) {
+      const createQuiz = await fetchData(
+        "POST",
+        endpoint,
+        "/api/quiz",
+        token,
+        JSON.stringify(json_quiz)
       );
+      console.log(createQuiz);
+    } else {
+      const createFlashcardPack = await fetchData(
+        "POST",
+        endpoint,
+        "/api/flashcard",
+        token,
+        JSON.stringify(json_flashcard_pack)
+      );
+      console.log(createFlashcardPack);
     }
   };
 
@@ -67,7 +95,6 @@ const Submit = () => {
     const text = e.target.value;
     setLineCount(lines);
     if (isQuiz) {
-      console.log("quiz");
       if (text.length === 0) {
         setQuizSubmission({} as QuizSubmission);
       }
