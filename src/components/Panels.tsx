@@ -4,6 +4,7 @@ import { useStore } from "../stores";
 import { FaLinux, FaHtml5, FaCss3Alt, FaJsSquare } from "react-icons/fa";
 import { RiCriminalLine } from "react-icons/ri";
 import { FaGlasses } from "react-icons/fa6";
+import { PiShareNetworkLight } from "react-icons/pi";
 
 const iconMap = {
   linux: FaLinux,
@@ -11,6 +12,7 @@ const iconMap = {
   css: FaCss3Alt,
   javascript: FaJsSquare,
   threat: RiCriminalLine,
+  networking: PiShareNetworkLight,
   default: FaGlasses,
 };
 
