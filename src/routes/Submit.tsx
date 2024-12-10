@@ -14,6 +14,9 @@ import { assert, is } from "superstruct";
 import { useStore } from "../stores";
 import { QuizSchema, FlashcardPackSchema } from "../validation";
 
+// this component has been deprecated as I now prefer to submit data via the API client
+// I've left in place because I may want to grab some of the code later, particularly the textarea line numbers
+
 async function fetchData(
   method: string,
   endpoint: string,
@@ -65,7 +68,7 @@ const Submit = () => {
       const createQuiz = await fetchData(
         "POST",
         endpoint,
-        "/api/quiz",
+        "",
         token,
         JSON.stringify(json_quiz)
       );
@@ -74,7 +77,7 @@ const Submit = () => {
       const createFlashcardPack = await fetchData(
         "POST",
         endpoint,
-        "/api/flashcard",
+        "",
         token,
         JSON.stringify(json_flashcard_pack)
       );
