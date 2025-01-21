@@ -14,8 +14,8 @@ import { assert, is } from "superstruct";
 import { useStore } from "../stores";
 import { QuizSchema, FlashcardPackSchema } from "../validation";
 
-// this component has been deprecated as I now prefer to submit data via the API client
-// I've left in place because I may want to grab some of the code later, particularly the textarea line numbers
+// this component has been deprecated as I now prefer to submit via an API client
+// I've left in place because I may want to grab some of the code later, particularly the textarea line numbering
 
 async function fetchData(
   method: string,

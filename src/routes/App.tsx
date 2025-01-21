@@ -60,6 +60,20 @@ function App() {
         {isDesktop && <SidebarNavigation />}
         {location.pathname === "/" ? <Features /> : <Outlet />}
       </Flex>
+      <Flex
+        borderTop="solid"
+        // borderTopWidth=".5px"
+        borderColor="gray.800"
+        bg="bg.surface"
+        as="footer"
+        py="4"
+        justify="center"
+        align="center"
+      >
+        <span>
+          © {new Date().getFullYear()} Chris White Rocks. All rights reserved.
+        </span>
+      </Flex>
     </Flex>
   );
 }
