@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Flex, useBreakpointValue } from "@chakra-ui/react";
+import { Flex, useBreakpointValue, Text } from "@chakra-ui/react";
 import { SidebarNavigation, HeaderNavigation, Features } from "../components";
 import { Outlet, useLocation } from "react-router-dom";
 import { useStore } from "../stores";
@@ -62,7 +62,6 @@ function App() {
       </Flex>
       <Flex
         borderTop="solid"
-        // borderTopWidth=".5px"
         borderColor="gray.800"
         bg="bg.surface"
         as="footer"
@@ -70,9 +69,9 @@ function App() {
         justify="center"
         align="center"
       >
-        <span>
+        <Text fontSize="sm" color="gray.500">
           © {new Date().getFullYear()} Chris White Rocks. All rights reserved.
-        </span>
+        </Text>
       </Flex>
     </Flex>
   );
